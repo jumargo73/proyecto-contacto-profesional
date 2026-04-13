@@ -1,0 +1,22 @@
+# --- Dependencias ---
+node_modules/
+backend/venv/
+backend/env/
+frontend/node_modules/
+
+# --- Variables de Entorno (¡Sensible!) ---
+.env
+.env.local
+
+# --- Archivos de Compilación ---
+dist/
+build/
+*.pyc
+__pycache__/
+
+# --- Sistema y Editores ---
+.vscode/
+.idea/
+.DS_Store
+*.log
+
