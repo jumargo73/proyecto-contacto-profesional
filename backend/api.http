@@ -1,0 +1,17 @@
+### Variable para la IP de WSL (Asegúrate de completar la IP completa)
+@baseUrl = http://172.26.159
+
+### Listar todos los contactos
+GET {{baseUrl}}/contacts
+
+###
+### Crear un nuevo contacto
+POST {{baseUrl}}/contacts
+Content-Type: application/json
+
+{
+    "name": "Prueba desde VS Code",
+    "email": "vscode@test.com",
+    "message": "Esto es mucho más fácil que curl"
+}
+
