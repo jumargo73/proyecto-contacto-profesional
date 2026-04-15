@@ -1,0 +1,57 @@
+<section class="contacto-section">
+  <div class="glass-form-container">
+    <div class="form-header">
+      <h2>Contáctanos</h2>
+      <p>Cuéntanos tu proyecto y hagámoslo realidad.</p>
+    </div>
+    <div class="container" *ngIf="contactoForm">
+
+      <form [formGroup]="contactoForm" (ngSubmit)="enviarFormulario()" class="contacto-form">
+        <div class="input-group">
+          <input type="text" formControlName="name" placeholder="Nombre completo" required>
+          <span class="bar"></span>
+          <!-- EL ERROR DEBE ESTAR AQUÍ ADENTRO -->
+          <small *ngIf="contactoForm.get('name')?.invalid && contactoForm.get('name')?.touched" class="text-danger">
+            El nombre es obligatorio.
+          </small>
+        </div>
+
+        <div class="input-group">
+          <input type="email" formControlName="email" placeholder="Correo electrónico" required>
+          <span class="bar"></span>
+           <!-- EL ERROR DEBE ESTAR AQUÍ ADENTRO -->
+          <small *ngIf="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched" class="text-danger">
+            El email es obligatorio.
+          </small>
+        </div>
+
+        <div class="input-group">
+          <select formControlName="subject">
+            <option value="" disabled selected>Tipo de Proyecto</option>
+            <option value="web">Desarrollo Web</option>
+            <option value="app">Mobile App</option>
+            <option value="ai">Inteligencia Artificial</option>
+          </select>
+          <span class="bar"></span>
+          <small *ngIf="contactoForm.get('subject')?.invalid && contactoForm.get('subject')?.touched" class="text-danger">
+            El tema es obligatorio.
+          </small>
+        </div>
+
+        <div class="input-group">
+          <textarea formControlName="message" placeholder="Cuéntanos un poco más..." rows="4"></textarea>
+          <span class="bar"></span>
+          <small *ngIf="contactoForm.get('message')?.invalid && contactoForm.get('message')?.touched" class="text-danger">
+            La descripcion es obligatorio.
+          </small>
+        </div>
+
+        <button type="submit" [disabled]="contactoForm.invalid" type="submit" class="btn-enviar">
+          ENVIAR MENSAJE
+          <div class="btn-glow"></div>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+

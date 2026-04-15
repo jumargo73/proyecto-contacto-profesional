@@ -9,6 +9,10 @@ export class CreateContactDto {
   email: string;
 
   @IsString()
+  @IsNotEmpty()
+  subject: string;
+
+  @IsString()
   @IsOptional()
   message?: string;
 }
