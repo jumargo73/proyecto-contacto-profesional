@@ -47,3 +47,8 @@ path.join(process.cwd(), "generated/client/libquery_engine-debian-openssl-3.0.x.
  * 
  */
 export type Contact = Prisma.ContactModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel

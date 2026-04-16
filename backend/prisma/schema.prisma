@@ -23,3 +23,13 @@ model Contact {
   message   String?
   createdAt DateTime @default(now())
 }
+
+// NUEVO: Modelo para los usuarios del sistema (tú)
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String   // Aquí guardaremos el hash, nunca la clave plana
+  name      String?
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+}

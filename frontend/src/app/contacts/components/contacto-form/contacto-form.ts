@@ -14,6 +14,7 @@ import { signal } from '@angular/core'; // Importa signal
 export class ContactoFormComponent implements OnInit {
   contactoForm: FormGroup; 
   contactos: any[] = [];
+  enviando = false;
  
 
   constructor(
@@ -43,9 +44,11 @@ export class ContactoFormComponent implements OnInit {
 
   enviarFormulario() {
     if (this.contactoForm.valid) {
+      this.enviando = true;
       this.contactoService.enviarContacto(this.contactoForm.value).subscribe({
         next: (respuesta) => {
           const idCreado = respuesta.id; // El ID que generó Prisma automáticamente
+          this.enviando = false;
           alert(`Mensaje enviado con éxito. Folio: ${idCreado}`);
           
           this.contactoForm.reset();

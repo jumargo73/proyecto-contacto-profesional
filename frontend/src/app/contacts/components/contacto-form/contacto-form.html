@@ -46,9 +46,9 @@
           </small>
         </div>
 
-        <button type="submit" [disabled]="contactoForm.invalid" type="submit" class="btn-enviar">
-          ENVIAR MENSAJE
-          <div class="btn-glow"></div>
+        <button type="submit" [disabled]="contactoForm.invalid || enviando" type="submit" class="btn-enviar">
+          <span *ngIf="!enviando">ENVIAR MENSAJE</span>
+          <span *ngIf="enviando">CONECTANDO CON EL NÚCLEO...</span>
         </button>
       </form>
     </div>
