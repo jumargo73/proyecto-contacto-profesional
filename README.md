@@ -31,6 +31,37 @@ ng g c shared/components/navbar
 ng g c shared/components/footer
 
 ng build
-ng server -o
+ng serve -o
 ng g m home
 ng g c home/components/banner
+
+
+
+#Estructura de Backend
+backend/
+├── src/
+│   ├── auth/
+│   │   ├── auth.module.ts
+│   │   ├── auth.service.ts
+│   │   └── auth.controller.ts
+│   ├── prisma/
+│   │   └── prisma.module.ts
+│   ├── contacts/
+│   │   └── contacts.module.ts
+│   ├── app.module.ts      <-- Aquí es donde importas los módulos anteriores
+│   └── main.ts
+└── ...
+
+
+#Estructura del Frontend
+frontend/
+├── src/
+│   ├── components/
+│   │   ├── ProtectedRoute.ts
+│   │   └── Navbar.ts
+│   ├── pages/
+│   │   ├── Login.ts
+│   │   └── Dashboard.ts
+│   ├── services/
+│   │   └── api.ts
+│   └── App.ts

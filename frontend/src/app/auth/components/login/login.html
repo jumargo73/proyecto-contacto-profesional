@@ -1,0 +1,27 @@
+<div class="login-container">
+  <div class="card-tech">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Tech Plataforma</h2>
+      <p class="text-muted">Ingresa tus credenciales</p>
+    </div>
+     <div class="container" *ngIf="loginForm">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <input type="email" formControlName="email" class="form-control-tech" placeholder="name@example.com">
+        <input type="password" formControlName="password" class="form-control-tech" placeholder="Password">
+
+        <div class="d-flex justify-content-between mb-3">
+          <label><input type="checkbox"> Recordarme</label>
+        </div>
+
+        <button type="submit" class="btn-tech">
+          Iniciar Sesión
+        </button>
+      </form>
+    </div>
+
+    <div class="links-container">
+      <a href="#" class="link-tech">¿Olvidaste tu clave?</a>
+      <p class="text-muted mt-3">¿No tienes cuenta? <a href="#" class="fw-bold text-blue-600">Regístrate</a></p>
+    </div>
+  </div>
+</div>

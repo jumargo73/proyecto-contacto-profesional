@@ -7,6 +7,8 @@ import { ContactoFormComponent } from './contacts/components/contacto-form/conta
 import { SharedModule } from './shared/shared-module';
 import { HomeModule } from './home/home-module';
 import { AppRoutingModule } from './app-routing-module';
+import { AuthModule } from './auth/auth-module';
+import { PagesModule } from './pages/pages-module';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { AppRoutingModule } from './app-routing-module';
     ContactoFormComponent,
     SharedModule,
     HomeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AuthModule,
+    PagesModule
 
   ],
   bootstrap: [App]
