@@ -1,0 +1,40 @@
+.navbar-horizontal {
+  display: flex;
+  justify-content: space-between; /* Logo a la izquierda, links a la derecha */
+  align-items: center;
+  padding: 0 2rem;
+  height: 70px;
+  background-color: #020412; /* El color oscuro de tu marca */
+  color: white;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px; /* Espacio entre cada enlace */
+  align-items: center;
+}
+
+.nav-links a {
+  color: #cccccc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ffffff; /* Brilla al pasar el mouse */
+}
+
+.api-status {
+  padding: 8px 16px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

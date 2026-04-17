@@ -1,0 +1,90 @@
+/* Contenedor principal que centra todo en pantalla */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #020412; /* Fondo oscuro de la app */
+  padding: 20px;
+}
+
+/* La tarjeta blanca (misma del login) */
+.card-tech {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.text-center { text-align: center; }
+.mb-4 { margin-bottom: 1.5rem; }
+
+.card-tech h2 {
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.card-tech p {
+  color: #666;
+  margin: 0;
+}
+
+/* Espaciado del grupo */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Footer de autenticación */
+.auth-footer {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+}
+
+.auth-footer a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Asegúrate de que el form tenga el ancho completo */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Mejora el espaciado del botón respecto al link de abajo */
+.btn-tech {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem; /* Más espacio arriba del botón */
+  margin-bottom: 1.5rem; /* Espacio para que el link no esté pegado */
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form-control-tech {
+  width: 100%;             /* Asegura que ocupe todo el ancho */
+  box-sizing: border-box;  /* ¡LA CLAVE! Incluye el padding dentro del 100% */
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.2rem;
+  border: 2px solid #e0e6ed;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.form-control-tech:focus {
+  outline: none;
+  border-color: #3b82f6; /* Azul Eléctrico al hacer foco */
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}

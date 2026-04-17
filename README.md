@@ -65,3 +65,6 @@ frontend/
 │   ├── services/
 │   │   └── api.ts
 │   └── App.ts
+
+sudo fuser -k 4200/tcp
+sudo fuser -k 3000/tcp

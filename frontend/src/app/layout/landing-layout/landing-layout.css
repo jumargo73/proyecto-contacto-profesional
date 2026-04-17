@@ -1,0 +1,17 @@
+.landing-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Esto le dice al router-outlet que ocupe todo el espacio sobrante */
+main {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+}
+
+
+app-footer {
+  flex-shrink: 0;
+}

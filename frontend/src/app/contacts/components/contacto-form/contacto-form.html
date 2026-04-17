@@ -1,55 +1,31 @@
-<section class="contacto-section">
-  <div class="glass-form-container">
-    <div class="form-header">
-      <h2>Contáctanos</h2>
-      <p>Cuéntanos tu proyecto y hagámoslo realidad.</p>
-    </div>
+<section class="page-container">
+  <div class="contact-card">
+    <h2>CONTÁCTANOS</h2>
+    <p>Cuéntanos tu proyecto y hagámoslo realidad.</p>
     <div class="container" *ngIf="contactoForm">
-
-      <form [formGroup]="contactoForm" (ngSubmit)="enviarFormulario()" class="contacto-form">
-        <div class="input-group">
-          <input type="text" formControlName="name" placeholder="Nombre completo" required>
-          <span class="bar"></span>
-          <!-- EL ERROR DEBE ESTAR AQUÍ ADENTRO -->
-          <small *ngIf="contactoForm.get('name')?.invalid && contactoForm.get('name')?.touched" class="text-danger">
-            El nombre es obligatorio.
-          </small>
+      <form  [formGroup]="contactoForm" (ngSubmit)="enviarFormulario()">
+        <div class="form-group">
+          <input type="text" formControlName="name" placeholder="Nombre completo">
         </div>
-
-        <div class="input-group">
-          <input type="email" formControlName="email" placeholder="Correo electrónico" required>
-          <span class="bar"></span>
-           <!-- EL ERROR DEBE ESTAR AQUÍ ADENTRO -->
-          <small *ngIf="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched" class="text-danger">
-            El email es obligatorio.
-          </small>
+        
+        <div class="form-group">
+          <input type="email" formControlName="email" placeholder="Correo electrónico">
         </div>
-
-        <div class="input-group">
+        
+        <div class="form-group">
           <select formControlName="subject">
             <option value="" disabled selected>Tipo de Proyecto</option>
-            <option value="web">Desarrollo Web</option>
-            <option value="app">Mobile App</option>
-            <option value="ai">Inteligencia Artificial</option>
+            <option>Telemetría</option>
+            <option>Desarrollo Web</option>
+            <option>Infraestructura</option>
           </select>
-          <span class="bar"></span>
-          <small *ngIf="contactoForm.get('subject')?.invalid && contactoForm.get('subject')?.touched" class="text-danger">
-            El tema es obligatorio.
-          </small>
         </div>
 
-        <div class="input-group">
-          <textarea formControlName="message" placeholder="Cuéntanos un poco más..." rows="4"></textarea>
-          <span class="bar"></span>
-          <small *ngIf="contactoForm.get('message')?.invalid && contactoForm.get('message')?.touched" class="text-danger">
-            La descripcion es obligatorio.
-          </small>
+        <div class="form-group">
+          <textarea formControlName="message" placeholder="Cuéntanos un poco más..."></textarea>
         </div>
 
-        <button type="submit" [disabled]="contactoForm.invalid || enviando" type="submit" class="btn-enviar">
-          <span *ngIf="!enviando">ENVIAR MENSAJE</span>
-          <span *ngIf="enviando">CONECTANDO CON EL NÚCLEO...</span>
-        </button>
+        <button type="submit" class="btn-submit">ENVIAR MENSAJE</button>
       </form>
     </div>
   </div>

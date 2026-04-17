@@ -1,0 +1,18 @@
+.layout-container {
+  display: grid;
+  grid-template-columns: 260px 1fr; /* 260px fijo para el sidebar, el resto para el contenido */
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  overflow: hidden;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Permite scroll solo en el contenido si es muy largo */
+}
+
+.content-area {
+  padding: 2rem;
+  background-color: #f9fafb; /* Un gris muy suave para que el contenido resalte */
+  flex-grow: 1;
+}

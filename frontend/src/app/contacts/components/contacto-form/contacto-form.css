@@ -1,118 +1,95 @@
-/* Centrado del formulario */
-.contacto-section {
+/* Contenedor principal con fondo oscuro profundo (como el login) */
+.page-container {
+  background-color: #020412;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column; /* Alinea encabezado y formulario uno abajo del otro */
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding-top: 100px; /* Esto empuja todo debajo del Navbar (80px nav + 20px espacio) */
-  background: #000428;
-}
-
-.form-header {
-  margin-bottom: 40px; 
-  text-align: center; /* Centra el título y el párrafo */
-  margin-bottom: 30px;
-  width: 100%;
-  max-width: 500px; /* Para que coincida con el ancho del formulario */
-}
-
-.form-header h2 {
-  font-family: 'Orbitron', sans-serif;
-  color: #00d4ff;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-size: 2.5rem;
-  margin: 0;
-}
-
-textarea {
-  resize: vertical; /* Solo permite estirar hacia abajo, no hacia los lados */
-  min-height: 100px;
-  max-height: 200px;
-}
-
-.form-header p {
-  color: #a0a0a0;
-  margin-top: 10px;
-}
-
-.contacto-form {
-  max-width: 600px;    /* No deja que se estire infinito */
-  margin: 40px auto;   /* Lo centra horizontalmente */
-  padding: 30px;
-  background: rgba(255, 255, 255, 0.03); /* Efecto cristal */
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.input-group {
-  margin-bottom: 25px;
+  padding: 20px; 
   width: 100%;
 }
 
-/* Estilo para los Inputs, Select y Textarea */
-.input-group input, 
-.input-group select, 
-.input-group textarea {
+/* La tarjeta blanca (el cambio principal) */
+.contact-card {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   width: 100%;
-  background: rgba(0, 0, 0, 0.2); 
-  border: none;
-  border-bottom: 2px solid #00d4ff; /* Línea azul neón */
-  padding: 12px;
-  color: white;
-  font-family: 'Inter', sans-serif;
-  outline: none;
+  max-width: 550px;
+  text-align: center;
 }
 
-::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+/* Títulos y texto en oscuro/gris (como el login) */
+.contact-card h2 {
+  font-family: sans-serif;
+  color: #1a1a1a;
+  margin-top: 0;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
-/* Efecto cuando haces clic (focus) */
-.input-group input:focus, 
-.input-group select:focus, 
-.input-group textarea:focus {
-  background: rgba(0, 212, 255, 0.1);
-  border-bottom-color: #00d4ff;
+.contact-card p {
+  color: #666666;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
 }
 
-/* Botón con estilo Tech */
-.btn-enviar {
-  background: #00d4ff;
-  color: #000;
+/* Agrupamiento para separación de campos */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Estilo de los campos (borde completo, fondo gris claro - como el login) */
+input, select, textarea {
+  width: 100%;
   padding: 15px;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  font-family: 'Orbitron', sans-serif;
-  cursor: pointer;
-  transition: 0.3s;
-  margin-top: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #e1e8ed;
+  border-radius: 8px;
+  color: #1a1a1a;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box; /* Crucial para el padding */
 }
 
-/* Botón deshabilitado (cuando el formulario es inválido) */
-.btn-enviar:disabled {
-  background: #333;
-  color: #666;
-  cursor: not-allowed;
+/* Efecto focus sutil (azul como el login) */
+input:focus, select:focus, textarea:focus {
+  border-color: #4c82f1;
 }
 
-/* Estilo para las opciones del select */
-select option {
-  background: #000428;
+/* Ajustes específicos */
+textarea {
+  height: 120px;
+  resize: vertical; /* Permite redimensionar solo hacia abajo */
+}
+
+select {
+  appearance: none; /* Quita el estilo nativo del select */
+  -webkit-appearance: none;
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 15px;
+  color: #666; /* Color de placeholder del select */
+}
+
+/* El botón azul sólido y ancho (como el login) */
+.btn-submit {
+  width: 100%;
+  background-color: #4c82f1;
   color: white;
-}
-
-.btn-enviar:not(:disabled) {
-  background: #00d4ff;
-  color: #000;
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
 }
 
-.btn-enviar:not(:disabled):hover {
-  box-shadow: 0 0 25px rgba(0, 212, 255, 0.7);
-  transform: translateY(-2px);
+.btn-submit:hover {
+  background-color: #3b6edb;
 }

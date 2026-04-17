@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Navbar } from './components/navbar/navbar';
+import { PublicNavbar } from './components/public-navbar/public-navbar';
 import { Footer } from './components/footer/footer';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router'
 
 @NgModule({
-  declarations: [Navbar, Footer],
+  declarations: [PublicNavbar, Footer],
   imports: [CommonModule,RouterModule],
-  exports: [Navbar, Footer]
+  exports:[ PublicNavbar,Footer]
 })
 export class SharedModule {}

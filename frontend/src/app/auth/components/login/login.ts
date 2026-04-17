@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router,RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-login',
-  imports:[CommonModule,ReactiveFormsModule],
+  imports:[CommonModule,ReactiveFormsModule,RouterModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -15,11 +16,15 @@ export class Login implements  OnInit {
 
   loginForm: FormGroup;
   enviando = false;
+  errorMessage=""
+  isApiOk=false
  
   
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
+
   ) {
     // Definimos los campos que coincidan con tu modelo de Prisma
     this.loginForm = this.fb.group({
@@ -33,19 +38,20 @@ export class Login implements  OnInit {
   }
 
   onLogin() {
-    if (this.loginForm.valid) {
-      this.enviando = true;
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (respuesta) => {
-          
-          this.enviando = false;
-          alert(`authentication ok`);
-          
-          this.loginForm.reset();
-                },
-        error: (err) => console.error(err)
-      });
-    }
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (response) => {
+        // Solo nos preocupamos por la navegación
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        console.error('Error de login', err);
+      }
+    });
   }
+
+
+  onLogout() {
+
+   }
 
 }

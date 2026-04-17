@@ -1,0 +1,15 @@
+<nav class="navbar-private">
+  <div class="api-status">
+    <span [style.color]="(isApiOk$ | async) ? 'green' : 'red'">
+      {{ (isApiOk$ | async) ? '● Conectado' : '○ Desconectado' }}
+    </span>    
+    API Status
+  </div>
+  
+  <div class="user-actions">
+    <span *ngIf="userName$ | async as name">
+      Bienvenido, {{ name }}
+    </span>
+    <button (click)="logout()" class="btn-logout">Cerrar Sesión</button>
+  </div>
+</nav>

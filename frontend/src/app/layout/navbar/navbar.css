@@ -1,0 +1,65 @@
+.navbar-private {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  border-bottom: 2px solid #e5e7eb;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.api-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.status-indicator {
+  font-size: 1.2rem;
+  /* Animación de pulso suave */
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-logout {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-logout:hover {
+  background-color: #dc2626;
+}
+
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #1f2937; /* Color gris muy oscuro (casi negro) para máxima legibilidad */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Fuentes modernas y claras */
+  font-size: 14px;
+}
+
+.user-actions strong {
+  color: #000000; /* Asegura que el nombre (que está dentro de un strong) sea negro sólido */
+  font-weight: 700;
+}

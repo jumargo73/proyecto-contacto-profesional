@@ -3,10 +3,13 @@
 /* 1. Fondo Profesional */
 .login-container {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #020412 0%, #10162f 100%); /* Degradado tech oscuro */
+ 
+
 }
 
 /* 2. La Tarjeta (Card) Centrada */
@@ -22,7 +25,8 @@
 
 /* 3. Inputs Modernos */
 .form-control-tech {
-  width: 100%;
+  width: 100%;             /* Asegura que ocupe todo el ancho */
+  box-sizing: border-box;  /* ¡LA CLAVE! Incluye el padding dentro del 100% */
   padding: 0.8rem 1rem;
   margin-bottom: 1.2rem;
   border: 2px solid #e0e6ed;
@@ -43,13 +47,15 @@
   width: 100%;
   padding: 0.8rem;
   margin-top: 0.5rem;
-  background-color: #3b82f6; /* Azul Eléctrico */
+  background-color: #3b82f6;
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  /* Opcional: añade un poco de espacio si el botón se ve muy pegado */
+  margin-bottom: 1rem;
 }
 
 .btn-tech:hover {
