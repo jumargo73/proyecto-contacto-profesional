@@ -20,12 +20,7 @@ async function bootstrap() {
   );
 
   // 2. Habilitar CORS para que el frontend (ej. localhost:3000) pueda conectar
-  app.enableCors({
-      origin: 'http://localhost:4200',
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      credentials: true,
-    }
-  );
+  app.enableCors(); 
 
   // 3. Prefijo para todas las rutas (opcional pero recomendado: api/v1/...)
   app.setGlobalPrefix('api');
