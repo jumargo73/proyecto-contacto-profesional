@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable,BehaviorSubject,tap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router,RouterModule } from '@angular/router';
+import { environment } from '../../../src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,7 @@ import { Router,RouterModule } from '@angular/router';
 
 export class AuthService {
 
-  
-  private apiUrl = 'http://localhost:3000/api/auth/login'; 
+  private apiUrl = `${environment.apiUrl}/auth/login`; 
 
   // 1. Creamos el emisor de estados
   private userSubject = new BehaviorSubject<any>(null);
@@ -43,7 +43,7 @@ export class AuthService {
     );
   }
 
-  private apiUrlRegister = 'http://localhost:3000/api/auth/register';
+  private apiUrlRegister = `${environment.apiUrl}/auth/register`;
 
   register(credentials: any): Observable<any> {
     return this.http.post(this.apiUrlRegister, credentials);
