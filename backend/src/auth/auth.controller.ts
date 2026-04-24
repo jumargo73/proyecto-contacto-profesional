@@ -11,4 +11,10 @@ export class AuthController {
     // Aquí recibimos el body { email, password }
     return this.authService.login(loginDto.email, loginDto.password);
   }
+
+  @Post('register') // Ruta: /api/auth/register
+  async register(@Body() dto: any) { 
+    return this.authService.register(dto.name,dto.email, dto.password);
+  
+  }
 }
