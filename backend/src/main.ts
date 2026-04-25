@@ -23,7 +23,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'https://proyecto-contacto-profesional-low9.vercel.app', //El dominio versel
-      'https://demo.julianmarcelogdigital.com', // El subdominio exacto de Hostinger
+      'https://cname.julianmarcelogdigital.com', // El subdominio exacto de Hostinger
       'http://localhost:4200' // Para desarrollo local
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
