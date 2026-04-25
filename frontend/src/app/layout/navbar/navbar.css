@@ -4,6 +4,7 @@
   display: flex !important;
   align-items: center !important; /* Centra todo verticalmente */
   padding: 0 20px !important;
+  background-color: aqua  !important;
 }
 
 /* Contenedor del usuario (el dropdown) */
@@ -24,6 +25,10 @@
   flex-shrink: 0; /* Impide que el icono se aplaste */
 }
 
+.text-success{
+  color: aliceblue !important;
+}
+
 /* Asegura que el botón de hamburguesa y el logo no se encimen */
 .navbar-toggler {
   margin-right: 10px;
@@ -33,6 +38,7 @@
 .navbar-brand {
   margin-right: auto; /* Empuja el logo a la izquierda, pegado al botón */
   font-size: 1rem;
+  color: aliceblue !important;
 }
 
 
