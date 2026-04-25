@@ -9,12 +9,6 @@
   <a class="navbar-brand" href="#">Mi Dashboard</a>
 
  
-  <!-- Botón Hamburguesa (solo visible en móvil) -->
-  <button class="navbar-toggler d-lg-none" (click)="toggleMenu()">
-    ☰
-  </button>
-
-  
   <!-- Reemplaza el 'collapse' por un dropdown simple -->
   <div class="ms-auto dropdown" *ngIf="isApiOk$ | async">
     <div (click)="toggleMenu()" class="d-flex align-items-center cursor-pointer text-white">
