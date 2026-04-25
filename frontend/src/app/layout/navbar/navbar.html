@@ -1,9 +1,12 @@
 <nav class="navbar-private">
   <div class="api-status">
-    <span [style.color]="(isApiOk$ | async) ? 'green' : 'red'">
-      {{ (isApiOk$ | async) ? '● Conectado' : '○ Desconectado' }}
-    </span>    
-    API Status
+    <ng-container *ngIf="isApiOk$ | async as token; else desconectado">
+      <span style="color: green;">● Conectado</span>
+    </ng-container>
+
+    <ng-template #desconectado>
+      <span style="color: red;">○ Desconectado</span>
+    </ng-template>
   </div>
   
   <div class="user-actions">

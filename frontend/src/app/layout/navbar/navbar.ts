@@ -16,19 +16,25 @@ import { catchError } from 'rxjs/operators';
 export class NavbarHorizontalComponent implements OnInit {
   // Esto le dice a TypeScript: "Sí, esta propiedad existe en esta clase"
   public userName$!: Observable<string>;
-  public isApiOk$!: Observable<boolean>;
+  public isApiOk$!: Observable<string | null>;
 
  
+ 
   
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+
+    
+  }
   
  
   
   ngOnInit() {
     this.userName$ = this.authService.userName$;
-    this.isApiOk$=this.authService.connection$;
-    console.log("Respuesta recibida desde authService redirect login a dashboard",this.userName$)
-    console.log("Respuesta recibida desde authService redirect login a dashboard",this.isApiOk$)
+    this.isApiOk$!=this.authService.connection$;
+
+      
+    //console.log("Respuesta recibida desde authService redirect login a dashboard",this.userName$)
+    //console.log("Respuesta recibida desde authService redirect login a dashboard",this.isApiOk$)
   }
 
 
