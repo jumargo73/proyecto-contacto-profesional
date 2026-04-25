@@ -1,10 +1,9 @@
 <nav class="navbar-horizontal">
   <div class="logo">TECHCORE</div>
   
-  <input type="checkbox" id="menu-bar">
-  <label for="menu-bar" class="menu-icon">☰</label>
+  <label class="menu-icon" (click)="isMenuOpen = !isMenuOpen">☰</label>
 
-  <ul class="nav-links">
+  <ul class="nav-links" [class.show]="isMenuOpen">
     <li><a routerLink="/inicio">Inicio</a></li>
     <li><a routerLink="/login">Login</a></li>
     <li><a routerLink="/servicios">Servicios</a></li>
