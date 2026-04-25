@@ -2,14 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PrismaService } from '../prisma/prisma.service'; // Ajusta la ruta a tu servicio de Prisma
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(private configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: 'MI_LLAVE_SECRETA_TECH_2024', // Debe ser la misma del módulo
+      secretOrKey: configService.get<string>('JWT_SECRET') as string, // Debe ser la misma del módulo
     });
   }
 
