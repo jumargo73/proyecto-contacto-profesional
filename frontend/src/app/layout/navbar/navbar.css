@@ -80,11 +80,20 @@
 
 /* --- COMPORTAMIENTO PARA ESCRITORIO --- */
 @media (min-width: 992px) {
+
   .navbar-collapse {
-    display: flex !important; /* Siempre visible en PC */
+    display: flex !important;
     flex-basis: auto;
+    flex-grow: 1; /* Esto hace que se estire y ocupe el centro */
   }
 
+  /* El auth-group ahora sí se irá a la derecha */
+  .auth-group {
+    margin-left: auto !important; 
+    flex-direction: row !important; /* Asegura que estén uno al lado del otro */
+    gap: 20px;
+  }
+  
   .navbar-toggler {
     display: none !important; /* Se oculta en PC */
   }
