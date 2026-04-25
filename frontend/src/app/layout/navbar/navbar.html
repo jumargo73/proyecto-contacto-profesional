@@ -6,6 +6,12 @@
 
   <!-- Derecha: Estado y Botón -->
   <div class="auth-group" *ngIf="isApiOk$ | async">
+
+    <div class="user-info-text" style="text-align: right; line-height: 1.2; margin-right: 15px;">
+      <small style="display: block; color: #666;">Bienvenido,</small>
+      <strong style="display: block;">{{ userName$ | async }}</strong>
+    </div>
+    
     <div class="status-wrapper">
        <span style="color: green;">● Conectado</span>
     </div>
