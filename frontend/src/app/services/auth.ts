@@ -28,7 +28,7 @@ export class AuthService {
       tap(response => {
         // 1. Guardamos el estado del usuario en el Subject
         if (response && response.access_token) {
-          console.log("Respuesta recibida desde services auth Frontend",response)
+          console.log("Respuesta recibida desde backend",response)
           const name = response.user.name;
           localStorage.setItem('access_token', response.access_token);
           localStorage.setItem('userName', name);
