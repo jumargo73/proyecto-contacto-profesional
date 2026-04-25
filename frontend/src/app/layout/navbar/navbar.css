@@ -1,81 +1,31 @@
-.navbar-private {
+.navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #ffffff;
-  border-bottom: 2px solid #e5e7eb;
-  font-family: 'Segoe UI', sans-serif;
+  justify-content: space-between; /* Empuja el contenido a los extremos */
+  align-items: center;            /* Centra todo verticalmente */
+  padding: 0 20px;                /* Espacio a los lados */
+  height: 60px;
+  width: 100%;
 }
 
-.api-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
-  color: #374151;
-}
-
-.status-indicator {
-  font-size: 1.2rem;
-  /* Animación de pulso suave */
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-.user-actions {
+.auth-group {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px; /* Espacio entre el texto verde y el botón rojo */
 }
 
+/* Este es el contenedor que envuelve el indicador y el botón */
+.status-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;      /* Espacio entre el texto verde y el botón */
+  margin-left: auto; /* ¡CLAVE!: Empuja todo hacia la derecha */
+}
+
+/* Ajuste opcional para que el botón no sea tan alto */
 .btn-logout {
-  background-color: #ef4444;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s;
-}
-
-.btn-logout:hover {
-  background-color: #dc2626;
-}
-
-
-.user-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: #1f2937; /* Color gris muy oscuro (casi negro) para máxima legibilidad */
-  font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Fuentes modernas y claras */
-  font-size: 14px;
-}
-
-.user-actions strong {
-  color: #000000; /* Asegura que el nombre (que está dentro de un strong) sea negro sólido */
-  font-weight: 700;
-}
-
-/* Contenedor principal del mensaje de bienvenida */
-.navbar-user-info {
-  display: flex;
-  align-items: center; /* Centra verticalmente */
-  gap: 15px;           /* Espacio entre el punto, el nombre y el botón */
-}
-
-/* Ajuste para el bloque de texto (Bienvenido + Nombre) */
-.user-text {
-  display: flex;
-  flex-direction: column; /* Nombre debajo de 'Bienvenido' */
-  line-height: 1.2;
+  padding: 5px 15px;
+  font-size: 0.85rem;
+  white-space: nowrap; /* Evita que el texto del botón se rompa en dos líneas */
 }
 
 

@@ -1,15 +1,35 @@
+<header class="navbar">
+  <!-- Izquierda: Título o Logo -->
+  <div class="logo">
+    <strong>Mi Dashboard</strong>
+  </div>
+
+  <!-- Derecha: Estado y Botón -->
+  <div class="auth-group" *ngIf="isApiOk$ | async">
+    <div class="status-wrapper">
+       <span style="color: green;">● Conectado</span>
+    </div>
+    
+    <button class="btn-logout" (click)="logout()">
+      Cerrar Sesión
+    </button>
+  </div>
+</header>
+
+
 <nav class="navbar-private">
   <div class="navbar-user-info" *ngIf="isApiOk$ | async">
       <span [style.color]="'green'" class="status-indicator">●</span>
       
       <div class="user-text">
         <small>Bienvenido,</small>
-        <strong>{{ userName$ | async }}</strong>
+        <strong><span *ngIf="userName$ | async as name">{{ name }}</span></strong>
         <span style="color: green; font-size: 0.7rem;">Conectado</span>
       </div>
 
       <button class="btn-logout" (click)="logout()">
         Cerrar Sesión
       </button>
-  </div>  
+  </div>
+  
 </nav>
