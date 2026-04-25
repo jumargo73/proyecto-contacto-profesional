@@ -63,3 +63,19 @@
   color: #000000; /* Asegura que el nombre (que está dentro de un strong) sea negro sólido */
   font-weight: 700;
 }
+
+/* Contenedor principal del mensaje de bienvenida */
+.navbar-user-info {
+  display: flex;
+  align-items: center; /* Centra verticalmente */
+  gap: 15px;           /* Espacio entre el punto, el nombre y el botón */
+}
+
+/* Ajuste para el bloque de texto (Bienvenido + Nombre) */
+.user-text {
+  display: flex;
+  flex-direction: column; /* Nombre debajo de 'Bienvenido' */
+  line-height: 1.2;
+}
+
+

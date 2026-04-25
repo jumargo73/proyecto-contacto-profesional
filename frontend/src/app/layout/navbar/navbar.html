@@ -1,18 +1,15 @@
 <nav class="navbar-private">
-  <div class="api-status">
-    <ng-container *ngIf="isApiOk$ | async as token; else desconectado">
-      <span style="color: green;">● Conectado</span>
-    </ng-container>
+  <div class="navbar-user-info" *ngIf="isApiOk$ | async">
+      <span [style.color]="'green'" class="status-indicator">●</span>
+      
+      <div class="user-text">
+        <small>Bienvenido,</small>
+        <strong>{{ userName$ | async }}</strong>
+        <span style="color: green; font-size: 0.7rem;">Conectado</span>
+      </div>
 
-    <ng-template #desconectado>
-      <span style="color: red;">○ Desconectado</span>
-    </ng-template>
-  </div>
-  
-  <div class="user-actions">
-    <span *ngIf="userName$ | async as name">
-      Bienvenido, {{ name }}
-    </span>
-    <button (click)="logout()" class="btn-logout">Cerrar Sesión</button>
-  </div>
+      <button class="btn-logout" (click)="logout()">
+        Cerrar Sesión
+      </button>
+  </div>  
 </nav>
