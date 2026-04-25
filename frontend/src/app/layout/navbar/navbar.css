@@ -1,10 +1,27 @@
 /* Fuerza a que el navbar sea siempre una sola fila */
 .navbar {
+  height: 65px; 
   display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important; 
-  align-items: center;
-  justify-content: space-between;
+  align-items: center !important; /* Centra todo verticalmente */
+  padding: 0 20px !important;
+}
+
+/* Contenedor del usuario (el dropdown) */
+.dropdown {
+  display: flex !important;
+  align-items: center; /* Alinea texto e icono en la misma línea */
+  height: 100%;
+}
+
+/* 3. Evita que el nombre empuje el icono hacia abajo */
+.user-info-text {
+  line-height: 1.1; /* Reduce el espacio entre 'Bienvenido' y el nombre */
+  margin-right: 10px;
+}
+
+/* 4. Ajuste para el icono del monito */
+.rounded-circle {
+  flex-shrink: 0; /* Impide que el icono se aplaste */
 }
 
 /* Asegura que el botón de hamburguesa y el logo no se encimen */
@@ -18,13 +35,7 @@
   font-size: 1rem;
 }
 
-/* Contenedor del usuario (el dropdown) */
-.dropdown {
-  margin-left: auto; /* Lo empuja al extremo derecho */
-  position: relative; /* Indispensable para dropdowns */
-  z-index: 1100;      /* Asegura que esté por encima de todo */
-  cursor: pointer !important;
-}
+
 
 .cursor-pointer {
   cursor: pointer !important;
