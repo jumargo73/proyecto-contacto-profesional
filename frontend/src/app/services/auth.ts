@@ -52,11 +52,12 @@ export class AuthService {
 
   logout(): void {
     // 1. Eliminar token del almacenamiento
-    localStorage.removeItem('auth_token'); // O sessionStorage
     
     // 2. Si usas BehaviorSubject para el estado, actualízalo
-    this.userSubject.next(null);
-    this.connectionSubject.next(false); // O el estado que corresponda
+    localStorage.clear();
+    this.userSubject.next(''); // En lugar de null, envía un texto vacío
+    this.connectionSubject.next(false);
+    
     
     // 3. Redirigir al login
     this.router.navigate(['/login']);
