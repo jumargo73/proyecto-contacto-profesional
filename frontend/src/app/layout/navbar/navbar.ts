@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Observable,BehaviorSubject,tap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { UiService } from '../../services/ui.service'
 
 
 @Component({
@@ -20,11 +21,17 @@ export class NavbarHorizontalComponent implements OnInit {
   isMenuOpen = false;
  
   
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private uiService: UiService ) {}
   
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    
+  }
+
+
+  toggleSidebar(){
+    this.uiService.toggleSidebar(); // Ahora esto controla al Sidebar
   }
  
   

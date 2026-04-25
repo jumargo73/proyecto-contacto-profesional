@@ -1,32 +1,38 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+
+  <!-- 1. Izquierda: Abre el Sidebar (Menús) -->
+  <button class="navbar-toggler d-lg-none" (click)="toggleSidebar()">
+    ☰
+  </button>
+
   <!-- Izquierda: Logo -->
   <a class="navbar-brand" href="#">Mi Dashboard</a>
 
+ 
   <!-- Botón Hamburguesa (solo visible en móvil) -->
   <button class="navbar-toggler d-lg-none" (click)="toggleMenu()">
     ☰
   </button>
 
-  <!-- Contenido colapsable -->
-  <div class="collapse navbar-collapse" [class.show]="isMenuOpen" id="navbarContent">
-    <div class="auth-group d-flex align-items-center ms-auto" *ngIf="isApiOk$ | async">
-      
-      <!-- Info de Usuario -->
-      <div class="user-info-text text-white text-end me-3">
+  
+  <!-- Reemplaza el 'collapse' por un dropdown simple -->
+  <div class="ms-auto dropdown" *ngIf="isApiOk$ | async">
+    <div (click)="toggleMenu()" class="d-flex align-items-center cursor-pointer text-white">
+      <div class="user-info-text text-end me-2 d-none d-sm-block">
         <small class="d-block opacity-75">Bienvenido,</small>
-        <strong class="d-block">{{ userName$ | async }}</strong>
+        <strong class="d-block" style="font-size: 0.8rem;">{{ userName$ | async }}</strong>
       </div>
+      <span class="btn btn-outline-light btn-sm rounded-circle">👤</span>
+    </div>
 
-      <!-- Estado -->
-      <div class="status-wrapper me-3">
-        <span style="color: #28a745;">● Conectado</span>
+    <!-- El menú que aparece al hacer clic -->
+    <div class="dropdown-menu dropdown-menu-end shadow p-3" [class.show]="isMenuOpen" 
+        style="position: absolute; right: 0; top: 100%;">
+      <div class="d-block d-sm-none mb-2">
+        <strong>{{ userName$ | async }}</strong>
       </div>
-        
-      <!-- Botón -->
-      <button class="btn btn-danger btn-sm" (click)="logout()">
-        Cerrar Sesión
-      </button>
-
+      <span class="text-success d-block mb-2" style="font-size: 0.8rem;">● Conectado</span>
+      <button class="btn btn-danger btn-sm w-100" (click)="logout()">Cerrar Sesión</button>
     </div>
   </div>
 </nav>
