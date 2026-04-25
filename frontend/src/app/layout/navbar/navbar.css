@@ -1,73 +1,38 @@
-/* Contenedor principal */
+/* Fuerza a que el navbar sea siempre una sola fila */
 .navbar {
-  display: flex;
-  flex-wrap: wrap;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important; 
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
-  background-color: #000814; /* El azul oscuro de tu imagen */
-  color: white;
-  min-height: 60px;
 }
 
-/* El título "Mi Dashboard" */
-.navbar-brand {
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: white;
-  text-decoration: none;
-}
-
-/* El grupo de usuario y botón */
-.auth-group {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-/* Botón de cerrar sesión */
-.btn-logout {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.btn-logout:hover {
-  background-color: #ff3333;
-}
-
+/* Asegura que el botón de hamburguesa y el logo no se encimen */
 .navbar-toggler {
-  display: block; /* Se ve en el celular */
-  background: transparent;
-  color: white;
-  border: 1px solid #444;
-  font-size: 1.5rem;
-  padding: 4px 10px;
-  cursor: pointer;
+  margin-right: 10px;
+  padding: 4px 8px;
 }
 
-.navbar-collapse {
-  display: none; /* Escondido en el celular hasta que toques el botón */
-  width: 100%;
+.navbar-brand {
+  margin-right: auto; /* Empuja el logo a la izquierda, pegado al botón */
+  font-size: 1rem;
 }
 
-.navbar-collapse.show {
-  display: block; /* Se muestra al abrir la hamburguesa */
+/* Contenedor del usuario (el dropdown) */
+.dropdown {
+  margin-left: auto; /* Lo empuja al extremo derecho */
 }
 
+/* Ajuste para que el menú desplegable no se vea blanco/feo en fondo oscuro */
 .dropdown-menu {
-  min-width: 180px;
-  background: #212529;
+  background-color: #1a1d20;
   border: 1px solid #444;
   color: white;
+  z-index: 2000; /* Para que aparezca sobre el sidebar */
 }
 
-.cursor-pointer {
-  cursor: pointer;
+.dropdown-menu strong {
+  color: white;
 }
 
 

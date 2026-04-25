@@ -16,14 +16,20 @@
         <small class="d-block opacity-75">Bienvenido,</small>
         <strong class="d-block" style="font-size: 0.8rem;">{{ userName$ | async }}</strong>
       </div>
-      <span class="btn btn-outline-light btn-sm rounded-circle">👤</span>
+      <span class="btn btn-primary btn-sm rounded-circle d-flex align-items-center justify-content-center" 
+            style="width: 35px; height: 35px;">
+        <i class="bi bi-person-fill"></i> <!-- Si usas Bootstrap Icons -->
+        👤
+      </span>
     </div>
 
     <!-- El menú que aparece al hacer clic -->
     <div class="dropdown-menu dropdown-menu-end shadow p-3" [class.show]="isMenuOpen" 
         style="position: absolute; right: 0; top: 100%;">
       <div class="d-block d-sm-none mb-2">
-        <strong>{{ userName$ | async }}</strong>
+        <strong class="d-block text-truncate" style="max-width: 120px; font-size: 0.8rem;">
+          {{ userName$ | async }}
+        </strong>
       </div>
       <span class="text-success d-block mb-2" style="font-size: 0.8rem;">● Conectado</span>
       <button class="btn btn-danger btn-sm w-100" (click)="logout()">Cerrar Sesión</button>
