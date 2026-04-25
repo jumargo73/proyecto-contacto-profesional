@@ -1,18 +1,43 @@
 .layout-container {
-  display: grid;
-  grid-template-columns: 260px 1fr; /* 260px fijo para el sidebar, el resto para el contenido */
-  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  display: flex;
+  height: 100vh;
   overflow: hidden;
 }
 
+.sidebar {
+  width: 260px;
+  background: #f4f4f4;
+  transition: all 0.3s ease;
+}
+
+
 .main-wrapper {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* Permite scroll solo en el contenido si es muy largo */
+  overflow: hidden; /* Evita scroll doble */
 }
 
 .content-area {
-  padding: 2rem;
-  background-color: #f9fafb; /* Un gris muy suave para que el contenido resalte */
-  flex-grow: 1;
+  flex: 1;
+  overflow-y: auto; /* Solo el contenido hace scroll */
+  padding: 1.5rem;
+}
+
+/* --- Ajustes para Móvil --- */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -260px; /* Escondido */
+    height: 100%;
+    z-index: 1000;
+  }
+
+  .sidebar.active {
+    left: 0; /* Clase para mostrarlo */
+  }
+
+  .main-wrapper {
+    width: 100%;
+  }
 }
