@@ -46,6 +46,11 @@
 
 /* --- Responsivo (Móvil) --- */
 @media (max-width: 768px) {
+  .navbar-horizontal {
+    position: relative; /* Crea el contexto de apilamiento */
+    z-index: 1000;      /* Asegura que la barra esté arriba */
+  }
+
   .menu-icon {
     display: block;
     font-size: 25px;
@@ -54,7 +59,7 @@
 
   .nav-links {
     position: absolute;
-    top: 60px;
+    top: 100px;
     left: 0;
     width: 100%;
     background: #1a1a1a;
@@ -62,6 +67,8 @@
     display: none; /* Oculto por defecto */
     padding: 20px 0;
     text-align: center;
+    z-index: 999; 
+    box-shadow: 0px 10px 15px rgba(0,0,0,0.3);
   }
 
   /* Mostrar menú al marcar el checkbox */
