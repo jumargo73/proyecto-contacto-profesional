@@ -1,12 +1,12 @@
 /* Contenedor principal con fondo oscuro profundo (como el login) */
 .page-container {
-  background-color: #020412;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px; 
   width: 100%;
+  background: linear-gradient(135deg, #020412 0%, #10162f 100%); /* Degradado tech oscuro */
+ 
 }
 
 /* La tarjeta blanca (el cambio principal) */
