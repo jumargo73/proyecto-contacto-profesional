@@ -3,12 +3,12 @@
   <a class="navbar-brand" href="#">Mi Dashboard</a>
 
   <!-- Botón Hamburguesa (solo visible en móvil) -->
-   <button class="navbar-toggler" (click)="toggleMenu()" style="color: white; border: 1px solid #444; background: transparent; padding: 5px 10px;">
+  <button class="navbar-toggler d-lg-none" (click)="toggleMenu()">
     ☰
   </button>
 
   <!-- Contenido colapsable -->
-  <div class="collapse navbar-collapse" [class.show]="isMenuOpen" id="navbarContent">
+  <div class="navbar-collapse" [class.show]="isMenuOpen" id="navbarContent">
     <div class="auth-group ms-auto d-flex flex-column flex-lg-row align-items-lg-center" *ngIf="isApiOk$ | async">
       
       <!-- Info de Usuario -->
