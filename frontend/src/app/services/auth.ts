@@ -30,8 +30,14 @@ export class AuthService {
         if (response && response.access_token) {
           console.log("Respuesta recibida desde backend",response)
           const name = response.user.name;
+          const token = response.access_token;
           localStorage.setItem('access_token', response.access_token);
-          localStorage.setItem('userName', name);
+          localStorage.setItem('userName', token);
+
+          console.log("Respuesta recibida desde backend token", localStorage.getItem('access_token'))
+          console.log("Respuesta recibida desde backend user",localStorage.getItem('userName'))        
+          
+
           this.userSubject.next(name); // El Navbar recibirá esto automáticamente
           this.connectionSubject.next(true) // El Navbar recibirá esto automáticamente
         }
