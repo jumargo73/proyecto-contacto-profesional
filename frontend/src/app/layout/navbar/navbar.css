@@ -44,6 +44,18 @@
 }
 
 
+/* Esto asegura que a partir de 992px el botón se elimine de la vista */
+@media (min-width: 992px) {
+  .navbar-toggler, 
+  button.navbar-toggler {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}
+
+
+
 
 
 
