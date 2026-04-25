@@ -26,6 +26,7 @@ export class NavbarHorizontalComponent implements OnInit {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    console.log('Estado del menú:', this.isMenuOpen); 
     
   }
 

@@ -21,7 +21,15 @@
 /* Contenedor del usuario (el dropdown) */
 .dropdown {
   margin-left: auto; /* Lo empuja al extremo derecho */
+  position: relative; /* Indispensable para dropdowns */
+  z-index: 1100;      /* Asegura que esté por encima de todo */
+  cursor: pointer !important;
 }
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
 
 /* Ajuste para que el menú desplegable no se vea blanco/feo en fondo oscuro */
 .dropdown-menu {
@@ -36,45 +44,7 @@
 }
 
 
-/* --- COMPORTAMIENTO PARA MÓVILES --- */
-@media (max-width: 991px) {
-  .navbar-collapse {
-    display: none; /* Escondido por defecto */
-    width: 100%;
-  }
 
-  /* Esta clase se activa con el (click) de tu botón */
-  .navbar-collapse.show {
-    display: block !important; 
-  }
-
-  .auth-group {
-    padding: 1rem 0;
-    border-top: 1px solid #444;
-    margin-top: 0.5rem;
-  }
-}
-
-/* --- COMPORTAMIENTO PARA ESCRITORIO --- */
-@media (min-width: 992px) {
-
-  .navbar-collapse {
-    display: flex !important;
-    flex-basis: auto;
-    flex-grow: 1; /* Esto hace que se estire y ocupe el centro */
-  }
-
-  /* El auth-group ahora sí se irá a la derecha */
-  .auth-group {
-    margin-left: auto !important; 
-    flex-direction: row !important; /* Asegura que estén uno al lado del otro */
-    gap: 20px;
-  }
-  
-  .navbar-toggler {
-    display: none !important; /* Se oculta en PC */
-  }
-}
 
 
 
