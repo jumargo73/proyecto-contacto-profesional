@@ -42,12 +42,12 @@ export class Login implements  OnInit {
   onLogin() {
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        console.log("Respuesta recibida desde authService frontend",response)
-        console.log("Respuesta recibida desde authService frontend token", localStorage.getItem('access_token'))
-        console.log("Respuesta recibida desde authService frontend user",localStorage.getItem('userName')) 
+        //console.log("Respuesta recibida desde authService frontend",response)
+        //console.log("Respuesta recibida desde authService frontend token", localStorage.getItem('access_token'))
+        //console.log("Respuesta recibida desde authService frontend user",localStorage.getItem('userName')) 
         // Solo nos preocupamos por la navegación
         this.zone.run(() => {
-          console.log("Antes de Redirect /dashboard")
+          //console.log("Antes de Redirect /dashboard")
           this.router.navigate(['/dashboard']);
         });
         

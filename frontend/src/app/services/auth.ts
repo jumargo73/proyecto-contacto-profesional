@@ -31,11 +31,11 @@ export class AuthService {
           console.log("Respuesta recibida desde backend",response)
           const name = response.user.name;
           const token = response.access_token;
-          localStorage.setItem('access_token', response.access_token);
-          localStorage.setItem('userName', token);
+          localStorage.setItem('access_token', token);
+          localStorage.setItem('userName', name);
 
-          console.log("Respuesta recibida desde backend token", localStorage.getItem('access_token'))
-          console.log("Respuesta recibida desde backend user",localStorage.getItem('userName'))        
+          //console.log("Respuesta recibida desde backend token", localStorage.getItem('access_token'))
+          //console.log("Respuesta recibida desde backend user",localStorage.getItem('userName'))        
           
 
           this.userSubject.next(name); // El Navbar recibirá esto automáticamente
