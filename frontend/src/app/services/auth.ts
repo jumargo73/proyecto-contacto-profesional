@@ -15,8 +15,9 @@ export class AuthService {
   private apiUrl = `${environment.apiUrl}/auth/login`; 
 
   // 1. Creamos el emisor de estados
-  private userSubject = new BehaviorSubject<any>(null);
-  private connectionSubject = new BehaviorSubject<boolean>(false);
+  private connectionSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('access_token'));
+  private userSubject = new BehaviorSubject<string>(localStorage.getItem('userName') || '');
+
   public userName$ = this.userSubject.asObservable();
   public connection$ = this.connectionSubject.asObservable();
 
@@ -26,15 +27,14 @@ export class AuthService {
     return this.http.post<any>(this.apiUrl, credentials).pipe(
       tap(response => {
         // 1. Guardamos el estado del usuario en el Subject
-        if (response && response.user) {
+        if (response && response.access_token) {
           console.log("Respuesta recibida desde services auth Frontend",response)
           const name = response.user.name;
+          localStorage.setItem('access_token', response.access_token);
           localStorage.setItem('userName', name);
           this.userSubject.next(name); // El Navbar recibirá esto automáticamente
+          this.connectionSubject.next(true) // El Navbar recibirá esto automáticamente
         }
-        
-        // 2. Notificamos que la conexión fue exitosa
-        this.connectionSubject.next(true);
       }),
       // 3. Capturamos errores para actualizar el estado de conexión
       catchError(error => {
