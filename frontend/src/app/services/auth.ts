@@ -27,6 +27,7 @@ export class AuthService {
       tap(response => {
         // 1. Guardamos el estado del usuario en el Subject
         if (response && response.user) {
+          console.log("Respuesta recibida desde services auth Frontend",response)
           const name = response.user.name;
           localStorage.setItem('userName', name);
           this.userSubject.next(name); // El Navbar recibirá esto automáticamente

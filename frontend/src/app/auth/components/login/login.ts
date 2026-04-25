@@ -40,6 +40,7 @@ export class Login implements  OnInit {
   onLogin() {
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
+        console.log("Respuesta recibida desde Backend",response)
         // Solo nos preocupamos por la navegación
         this.router.navigate(['/dashboard']);
       },
