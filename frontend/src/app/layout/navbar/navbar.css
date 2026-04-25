@@ -1,68 +1,68 @@
+/* Contenedor principal */
 .navbar {
   display: flex;
-  justify-content: space-between; /* Empuja el contenido a los extremos */
-  align-items: center;            /* Centra todo verticalmente */
-  padding: 0 20px;                /* Espacio a los lados */
-  height: 60px;
-  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: #000814; /* El azul oscuro de tu imagen */
+  color: white;
+  min-height: 60px;
 }
 
+/* El título "Mi Dashboard" */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+  text-decoration: none;
+}
+
+/* El grupo de usuario y botón */
 .auth-group {
   display: flex;
   align-items: center;
-  gap: 20px; /* Espacio entre el texto verde y el botón rojo */
+  gap: 15px;
 }
 
-/* Este es el contenedor que envuelve el indicador y el botón */
-.status-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 15px;      /* Espacio entre el texto verde y el botón */
-  margin-left: auto; /* ¡CLAVE!: Empuja todo hacia la derecha */
-}
-
-/* Ajuste opcional para que el botón no sea tan alto */
-.btn-logout {
-  padding: 5px 15px;
-  font-size: 0.85rem;
-  white-space: nowrap; /* Evita que el texto del botón se rompa en dos líneas */
-}
-
-
-/* Contenedor principal para móviles */
-@media (max-width: 768px) {
-  .auth-group {
-    display: flex;
-    align-items: center;
-    gap: 8px; /* Espacio mínimo entre elementos */
+/* Estilos para móviles (Corte en 992px como Bootstrap) */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    display: none; /* Escondido por defecto */
     width: 100%;
-    justify-content: flex-end;
+    flex-basis: 100%;
   }
 
-  /* Ajuste para el nombre largo */
-  .user-info-text {
-    max-width: 100px; /* Evita que el nombre empuje todo */
-    overflow: hidden;
-    text-overflow: ellipsis; /* Pone "..." si el nombre es muy largo */
-    white-space: nowrap; 
-    font-size: 0.75rem;
+  .navbar-collapse.show {
+    display: block; /* Se muestra al abrir la hamburguesa */
+    padding: 1rem 0;
   }
 
-  /* Hacer el botón más pequeño en móvil */
-  .btn-logout {
-    padding: 4px 8px;
-    font-size: 0.7rem;
-    white-space: nowrap;
-  }
-
-  /* Ocultar el texto "Conectado" y dejar solo el punto */
-  .status-wrapper span {
-    font-size: 0; /* Esconde el texto */
-  }
-  .status-wrapper span::before {
-    content: '●';
-    font-size: 1rem; /* Deja solo el punto visible */
+  .auth-group {
+    flex-direction: column; /* Apila los elementos: nombre, punto, botón */
+    align-items: flex-start;
+    gap: 10px;
+    border-top: 1px solid #333;
+    margin-top: 10px;
+    padding-top: 15px;
   }
 }
+
+/* Botón de cerrar sesión */
+.btn-logout {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-logout:hover {
+  background-color: #ff3333;
+}
+
+
 
 

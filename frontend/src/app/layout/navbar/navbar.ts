@@ -17,15 +17,15 @@ export class NavbarHorizontalComponent implements OnInit {
   // Esto le dice a TypeScript: "Sí, esta propiedad existe en esta clase"
   public userName$!: Observable<string>;
   public isApiOk$!: Observable<string | null>;
-
- 
+  isMenuOpen = false;
  
   
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService) {}
+  
 
-
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
-  
  
   
   ngOnInit() {

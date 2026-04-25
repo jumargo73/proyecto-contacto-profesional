@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   canActivate(): boolean {
     const token = localStorage.getItem('access_token');
 
-    console.log("Este es el Tocken recibido desde Backen en AUTHGuard",token)
+    //console.log("Este es el Tocken recibido desde Backen en AUTHGuard",token)
 
     if (token) {
       // Si hay token, permitimos el paso
