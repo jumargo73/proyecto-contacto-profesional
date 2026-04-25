@@ -29,3 +29,40 @@
 }
 
 
+/* Contenedor principal para móviles */
+@media (max-width: 768px) {
+  .auth-group {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espacio mínimo entre elementos */
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  /* Ajuste para el nombre largo */
+  .user-info-text {
+    max-width: 100px; /* Evita que el nombre empuje todo */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Pone "..." si el nombre es muy largo */
+    white-space: nowrap; 
+    font-size: 0.75rem;
+  }
+
+  /* Hacer el botón más pequeño en móvil */
+  .btn-logout {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  /* Ocultar el texto "Conectado" y dejar solo el punto */
+  .status-wrapper span {
+    font-size: 0; /* Esconde el texto */
+  }
+  .status-wrapper span::before {
+    content: '●';
+    font-size: 1rem; /* Deja solo el punto visible */
+  }
+}
+
+
