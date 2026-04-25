@@ -17,19 +17,3 @@
 </header>
 
 
-<nav class="navbar-private">
-  <div class="navbar-user-info" *ngIf="isApiOk$ | async">
-      <span [style.color]="'green'" class="status-indicator">●</span>
-      
-      <div class="user-text">
-        <small>Bienvenido,</small>
-        <strong><span *ngIf="userName$ | async as name">{{ name }}</span></strong>
-        <span style="color: green; font-size: 0.7rem;">Conectado</span>
-      </div>
-
-      <button class="btn-logout" (click)="logout()">
-        Cerrar Sesión
-      </button>
-  </div>
-  
-</nav>
