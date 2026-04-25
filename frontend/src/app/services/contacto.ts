@@ -9,7 +9,7 @@ import { environment } from '../../../src/environments/environment';
 })
 export class ContactoService {
   // Cambia la URL si tu NestJS corre en otro puerto
-  private apiUrl = `${environment.apiUrl}/api/contacts`; 
+  private apiUrl = `${environment.apiUrl}/contacts`; 
 
   constructor(private http: HttpClient) { }
 
