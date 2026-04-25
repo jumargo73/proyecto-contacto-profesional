@@ -1,10 +1,11 @@
 .navbar-horizontal {
   display: flex;
   justify-content: space-between; /* Logo a la izquierda, links a la derecha */
-  align-items: center;
-  padding: 0 2rem;
-  height: 70px;
-  background-color: #020412; /* El color oscuro de tu marca */
+  align-items: center; 
+  height: 70px;  
+  color: white;  
+  padding: 1rem 5%;
+  background: #1a1a1a;
   color: white;
 }
 
@@ -20,10 +21,10 @@
   align-items: center;
 }
 
-.nav-links a {
-  color: #cccccc;
+.nav-links a {  
   text-decoration: none;
   transition: color 0.3s;
+  color: white;  
 }
 
 .nav-links a:hover {
@@ -37,4 +38,38 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+#menu-bar, .menu-icon {
+  display: none;
+}
+
+/* --- Responsivo (Móvil) --- */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+    font-size: 25px;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #1a1a1a;
+    flex-direction: column;
+    display: none; /* Oculto por defecto */
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  /* Mostrar menú al marcar el checkbox */
+  #menu-bar:checked ~ .nav-links {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+  }
 }
