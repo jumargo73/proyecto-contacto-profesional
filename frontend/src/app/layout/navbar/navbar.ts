@@ -18,7 +18,7 @@ export class NavbarHorizontalComponent implements OnInit {
   // Esto le dice a TypeScript: "Sí, esta propiedad existe en esta clase"
   public userName$!: Observable<string>;
   public isApiOk$!: Observable<string | null>;
-  isMenuOpen = false;
+  public isMenuOpen = false;
  
   
   constructor(private authService: AuthService,private uiService: UiService ) {}
@@ -39,8 +39,7 @@ export class NavbarHorizontalComponent implements OnInit {
   ngOnInit() {
     this.userName$ = this.authService.userName$;
     this.isApiOk$=this.authService.connection$;
-
-      
+          
     //console.log("Respuesta recibida desde authService redirect login a dashboard",this.userName$)
     //console.log("Respuesta recibida desde authService redirect login a dashboard",this.isApiOk$)
   }
