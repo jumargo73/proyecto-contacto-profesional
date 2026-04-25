@@ -23,14 +23,14 @@ export class NavbarHorizontalComponent implements OnInit {
   
   constructor(private authService: AuthService) {
 
-    
+
   }
   
  
   
   ngOnInit() {
     this.userName$ = this.authService.userName$;
-    this.isApiOk$!=this.authService.connection$;
+    this.isApiOk$=this.authService.connection$;
 
       
     //console.log("Respuesta recibida desde authService redirect login a dashboard",this.userName$)
