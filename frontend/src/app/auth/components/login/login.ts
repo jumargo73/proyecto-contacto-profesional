@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router,RouterModule } from '@angular/router';
+import { NgZone } from '@angular/core';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class Login implements  OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private zone: NgZone
 
   ) {
     // Definimos los campos que coincidan con tu modelo de Prisma
@@ -42,7 +44,10 @@ export class Login implements  OnInit {
       next: (response) => {
         console.log("Respuesta recibida desde authService frontend",response)
         // Solo nos preocupamos por la navegación
-        this.router.navigate(['/dashboard']);
+        this.zone.run(() => {
+          this.router.navigate(['/dashboard']);
+        });
+        
       },
       error: (err) => {
         console.error('Error de login', err);
