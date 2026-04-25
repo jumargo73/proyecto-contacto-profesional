@@ -20,7 +20,16 @@ async function bootstrap() {
   );
 
   // 2. Habilitar CORS para que el frontend (ej. localhost:3000) pueda conectar
-  app.enableCors(); 
+  app.enableCors({
+    origin: [
+      'https://proyecto-contacto-profesional-low9.vercel.app', //El dominio versel
+      'https://demo.julianmarcelogdigital.com', // El subdominio exacto de Hostinger
+      'http://localhost:4200' // Para desarrollo local
+    ],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+    allowedHeaders: 'Content-Type, Accept, Authorization',
+  }); 
 
   // 3. Prefijo para todas las rutas (opcional pero recomendado: api/v1/...)
   app.setGlobalPrefix('api');
