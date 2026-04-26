@@ -116,3 +116,12 @@
 .form-control-tech {
   color: #111827 !important; /* Texto de escritura oscuro */
 }
+
+.mensaje-error {
+  color: #dc3545 !important; /* Rojo fuerte */
+  font-weight: bold;
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: middle;
+}

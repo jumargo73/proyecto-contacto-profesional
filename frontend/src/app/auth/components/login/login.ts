@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router,RouterModule } from '@angular/router';
 import { NgZone } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ChangeDetectorRef } from '@angular/core';
 
 
 @Component({
@@ -17,7 +19,7 @@ export class Login implements  OnInit {
 
   loginForm: FormGroup;
   enviando = false;
-  errorMessage=""
+  errorMessage: string = ''; 
   isApiOk=false
  
   
@@ -25,7 +27,8 @@ export class Login implements  OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private zone: NgZone
+    private zone: NgZone,
+    private cd: ChangeDetectorRef
 
   ) {
     // Definimos los campos que coincidan con tu modelo de Prisma
@@ -52,8 +55,10 @@ export class Login implements  OnInit {
         });
         
       },
-      error: (err) => {
-        console.error('Error de login', err);
+      error: (err: HttpErrorResponse) => {
+        this.errorMessage=err.error.message
+        this.cd.detectChanges();
+        console.error('Respuesta desde Backend', this.errorMessage);
       }
     });
   }

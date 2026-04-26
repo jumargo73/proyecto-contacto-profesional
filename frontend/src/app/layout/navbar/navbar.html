@@ -1,41 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+<nav class="custom-navbar">
+  <!-- Izquierda: Hamburguesa y Logo -->
+  <div class="nav-brand-group">
+    <button class="menu-toggle-btn" (click)="toggleSidebar()">☰</button>
+    <a class="brand-text" href="#">Mi Dashboard</a>
+  </div>
 
-  <!-- 1. Izquierda: Abre el Sidebar (Menús) -->
-  <button class="navbar-toggler d-lg-none" (click)="toggleSidebar()">
-    ☰
-  </button>
-
-  <!-- Izquierda: Logo -->
-  <a class="navbar-brand" href="#">Mi Dashboard</a>
-
- 
-  <!-- Reemplaza el 'collapse' por un dropdown simple -->
-  <div class="ms-auto dropdown" *ngIf="isApiOk$ | async">
-    <div (click)="toggleMenu()" class="d-flex align-items-center cursor-pointer text-white">
-      <div class="user-info-text text-end me-2 d-none d-sm-block">
-        <small class="d-block opacity-75">Bienvenido,</small>
-        <strong class="d-block" style="font-size: 0.8rem;">{{ userName$ | async }}</strong>
+  <!-- Derecha: Perfil -->
+  <div class="user-profile-group" *ngIf="isApiOk$ | async">
+    <div (click)="toggleMenu()" class="profile-trigger">
+      
+      <!-- El nombre solo existe en pantallas grandes -->
+      <div class="user-name-wrapper">
+        <span class="welcome-label">Bienvenido,</span>
+        <span class="user-full-name">{{ userName$ | async }}</span>
       </div>
-      <span class="btn btn-primary btn-sm rounded-circle d-flex align-items-center justify-content-center" 
-            style="width: 35px; height: 35px;">
-        <i class="bi bi-person-fill"></i> <!-- Si usas Bootstrap Icons -->
+
+      <!-- El Avatar (Botón circular) -->
+      <div class="avatar-circle-btn">
         👤
-      </span>
+      </div>
     </div>
 
-    <!-- El menú que aparece al hacer clic -->
-    <div class="dropdown-menu dropdown-menu-end shadow p-3" [class.show]="isMenuOpen" *ngIf="isMenuOpen"
-        style="position: absolute; right: 0; top: 100%; display: block;">
-      <div class="d-block d-sm-none mb-2">
-        <strong class="text-white">
-          {{ userName$ | async }}
-        </strong>
+    <!-- Menú Desplegable -->
+    <div class="profile-dropdown-menu" [class.is-open]="isMenuOpen" *ngIf="isMenuOpen">
+      <div class="mobile-user-info">
+        <strong>{{ userName$ | async }}</strong>
+        <span class="status-online">● En línea</span>
       </div>
-      <span class="text-success d-block mb-2" style="font-size: 0.8rem;">● Conectado</span>
-      <button class="btn btn-danger btn-sm w-100" (click)="logout()">Cerrar Sesión</button>
+      <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
     </div>
   </div>
 </nav>
+
+
+
+
+
+
 
 
 

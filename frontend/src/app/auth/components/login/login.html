@@ -13,6 +13,11 @@
           <label><input type="checkbox"> Recordarme</label>
         </div>
 
+        <div class="mensaje-error" *ngIf="errorMessage">
+          <span class="warning-icon">⚠️</span>
+          <span>{{ errorMessage }}</span> <!-- Aquí debe ir el nombre de tu variable -->
+        </div>
+
         <button type="submit" class="btn-tech">
           Iniciar Sesión
         </button>

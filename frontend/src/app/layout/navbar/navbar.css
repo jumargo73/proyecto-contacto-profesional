@@ -1,87 +1,130 @@
-/* Fuerza a que el navbar sea siempre una sola fila */
-.navbar {
-  height: 65px; 
+/* Contenedor Principal */
+.custom-navbar {
   display: flex !important;
-  align-items: center !important; /* Centra todo verticalmente */
-  padding: 0 20px !important;
-  background-color: rgb(44, 46, 46)  !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background-color: #212529; /* Gris oscuro */
+  height: 60px;
+  padding: 0 15px;
+  color: white;
+  position: relative;
 }
 
-/* Contenedor del usuario (el dropdown) */
-.dropdown {
-  display: flex !important;
-  align-items: center; /* Alinea texto e icono en la misma línea */
-  height: 100%;
+/* Grupo Izquierda */
+.nav-brand-group {
+  display: flex;
+  align-items: center;
 }
 
+.menu-toggle-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+}
 
-/* Se muestra SOLO cuando la variable es true */
-.dropdown-menu.show {
-  display: block !important;
-  visibility: visible;
+/* Ocultar hamburguesa en PC */
+@media (min-width: 992px) {
+  .menu-toggle-btn { display: none; }
+}
+
+.brand-text {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Grupo Derecha (Perfil) */
+.user-profile-group {
+  position: relative;
+}
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* OCULTAR NOMBRE EN MÓVILES (Menos de 768px) */
+.user-name-wrapper {
+  display: none; /* Oculto por defecto */
+  flex-direction: column;
+  text-align: right;
+  margin-right: 10px;
+}
+
+/* MOSTRAR NOMBRE EN PC */
+@media (min-width: 768px) {
+  .user-name-wrapper { display: flex; }
+}
+
+.welcome-label {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.user-full-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Avatar Circular (Indestructible) */
+.avatar-circle-btn {
+  width: 38px;
+  height: 38px;
+  min-width: 38px; /* Evita que se aplaste */
+  background-color: #0d6efd;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+/* Menú Desplegable Profesional */
+.profile-dropdown-menu {
   position: absolute;
   right: 0;
-  top: 100%;
+  top: 50px;
+  background: white;
+  color: #333;
+  min-width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  padding: 15px;
+  z-index: 1000;
 }
 
-/* 3. Evita que el nombre empuje el icono hacia abajo */
-.user-info-text {
-  line-height: 1.1; /* Reduce el espacio entre 'Bienvenido' y el nombre */
-  margin-right: 10px;
+.mobile-user-info {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-/* 4. Ajuste para el icono del monito */
-.rounded-circle {
-  flex-shrink: 0; /* Impide que el icono se aplaste */
+@media (min-width: 768px) {
+  .mobile-user-info { display: none; } /* Oculto en PC porque ya se ve fuera */
 }
 
-.text-success{
-  color: aliceblue !important;
+.status-online {
+  display: block;
+  color: #28a745;
+  font-size: 0.75rem;
 }
 
-/* Asegura que el botón de hamburguesa y el logo no se encimen */
-.navbar-toggler {
-  margin-right: 10px;
-  padding: 4px 8px;
-}
-
-.navbar-brand {
-  margin-right: auto; /* Empuja el logo a la izquierda, pegado al botón */
-  font-size: 1rem;
-  color: aliceblue !important;
-}
-
-
-.cursor-pointer {
-  cursor: pointer !important;
-}
-
-
-/* Ajuste para que el menú desplegable no se vea blanco/feo en fondo oscuro */
-.dropdown-menu {
-  background-color: #1a1d20;
-  border: 1px solid #444;
+.logout-btn {
+  width: 100%;
+  background-color: #dc3545;
   color: white;
-  z-index: 2000; /* Para que aparezca sobre el sidebar */
-  display: none !important;
-  visibility: hidden;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
 }
-
-.dropdown-menu strong {
-  color: white;
-}
-
-
-/* Esto asegura que a partir de 992px el botón se elimine de la vista */
-@media (min-width: 992px) {
-  .navbar-toggler, 
-  button.navbar-toggler {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-  }
-}
-
 
 
 

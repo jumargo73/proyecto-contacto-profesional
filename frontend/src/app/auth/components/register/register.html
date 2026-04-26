@@ -18,6 +18,11 @@
             <input type="password" formControlName="password" class="form-control-tech" placeholder="Contraseña" required>
         </div>
 
+        <div class="mensaje-error" *ngIf="errorMessage">
+          <span class="warning-icon">⚠️</span>
+          <span>{{ errorMessage }}</span> <!-- Aquí debe ir el nombre de tu variable -->
+        </div>
+
         <button type="submit" class="btn-tech">Registrarse</button>
         
         <p class="auth-footer">

@@ -4,6 +4,8 @@ import { AuthService } from '../../../services/auth';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router,RouterModule } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-register',  
@@ -21,7 +23,8 @@ export class Register implements  OnInit {
   constructor(
       private fb: FormBuilder,
       private authService: AuthService,
-      private router: Router
+      private router: Router,
+      private cd: ChangeDetectorRef
   
     ) {
       // Definimos los campos que coincidan con tu modelo de Prisma
@@ -43,8 +46,10 @@ export class Register implements  OnInit {
           localStorage.setItem('token', respuesta.access_token);
           this.router.navigate(['/login']);
         },
-        error: (err) => {
-          this.errorMessage = 'Credenciales incorrectas';
+        error: (err: HttpErrorResponse) => {
+          this.errorMessage=err.error.message
+          this.cd.detectChanges();
+          console.error('Respuesta desde Backend', this.errorMessage);
         } 
       });
   }
