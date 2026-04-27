@@ -18,6 +18,7 @@ export class ContactsService {
   }
 
   // 3. Modificamos el findAll para traer todos los registros
+  
   async findAll() {
     return await this.prisma.contact.findMany();
   }

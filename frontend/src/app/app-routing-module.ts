@@ -7,10 +7,12 @@
   import { ContactoFormComponent } from './contacts/components/contacto-form/contacto-form';
   import { LandingLayoutComponent } from './layout/landing-layout/landing-layout';
   import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout';
+  import { ServiceManagement } from './components/service-management/service-management';
 
   
   import { ProfileComponent } from './pages/components/profile/profile.component';
   import { AuthGuard } from './services/auth.guard'; // Tu guardia de seguridad
+  import { GuestGuard } from './services/guest.guard'; // Tu guardia de seguridad
 
   const routes: Routes = [
       // Ruta Pública
@@ -18,6 +20,7 @@
       { 
         path: '', 
         component: LandingLayoutComponent, // Este componente tiene el <app-public-navbar>
+        canActivate: [GuestGuard], 
         children: [
           { path: '', component: Banner },
           { path: 'login', component: Login },
@@ -47,12 +50,17 @@
           { 
             path: 'perfil', 
             component: ProfileComponent 
+          },
+          { 
+            path: 'services_list', 
+            component: ServiceManagement 
           }
         ]
       },
 
       // Comodín para redirigir si la ruta no existe
-      { path: '**', redirectTo: '/' }
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '**', redirectTo: 'dashboard' }
     ];
 
 

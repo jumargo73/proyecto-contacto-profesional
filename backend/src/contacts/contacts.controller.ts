@@ -14,7 +14,7 @@ export class ContactsController {
     return this.contactsService.create(createContactDto);
   }
 
-  @UseGuards(JwtAuthGuard) // <--- Aquí activas la seguridad
+  //@UseGuards(JwtAuthGuard) // <--- Aquí activas la seguridad
   @Get()
   findAll() {
     return this.contactsService.findAll();

@@ -1,43 +1,67 @@
+/* --- ESTADO PC (Escritorio) --- */
 .layout-container {
   display: flex;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
 .sidebar {
-  width: 260px;
-  background: #f4f4f4;
-  transition: all 0.3s ease;
+  width: 260px;      /* Ancho fijo a la izquierda */
+  height: 100vh;     /* De arriba a abajo */
+  flex-shrink: 0;
+  z-index: 40;
 }
 
-
 .main-wrapper {
-  flex: 1;
   display: flex;
-  flex-direction: column;
-  overflow: hidden; /* Evita scroll doble */
+  flex-direction: column; /* Navbar arriba, contenido abajo */
+  flex-grow: 1;           /* Ocupa todo el espacio sobrante */
+  overflow: hidden;
+}
+
+.navbar {
+  height: 64px;           /* Altura fija */
+  width: 100%;            /* Ocupa el ancho sobrante del sidebar */
+  flex-shrink: 0;
+  z-index: 50;
 }
 
 .content-area {
-  flex: 1;
-  overflow-y: auto; /* Solo el contenido hace scroll */
-  padding: 1.5rem;
+  flex-grow: 1;           /* Espacio sobrante final */
+  overflow-y: auto;
+  padding: 2rem;
 }
 
-/* --- Ajustes para Móvil --- */
+/* --- ESTADO MÓVIL (Bajo 768px) --- */
 @media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column; /* Navbar pasa a estar arriba de todo */
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px; /* Altura de tu nav */
+    z-index: 100;  /* Nivel máximo */
+  }
+
   .sidebar {
     position: fixed;
-    left: -260px; /* Escondido */
-    height: 100%;
-    z-index: 1000;
+    top: 64px;    /* <--- CLAVE: El alto de tu Navbar */
+    left: 0;
+    height: calc(100vh - 64px); /* Altura restante */
+    z-index: 90;  /* Menor que el navbar (100) */
+    width: 260px;
+    transition: transform 0.3s ease;  /* Flota sobre el contenido */
+    /* La clase de Angular translate-x-full lo oculta/muestra */
   }
 
-  .sidebar.active {
-    left: 0; /* Clase para mostrarlo */
-  }
-
-  .main-wrapper {
-    width: 100%;
+  .content-area {
+    margin-top: 64px;       /* Deja espacio para el nav fijo */
+    width: 100vw;
   }
 }
+
