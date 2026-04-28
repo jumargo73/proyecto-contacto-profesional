@@ -17,33 +17,36 @@
           <tr>
             <th class="px-6 py-4">Usuario</th>
             <th class="px-6 py-4">Asunto</th>
-            <th class="px-6 py-4">Fecha</th>
-            <th class="px-6 py-4">Mensaje</th>
+            <th class="px-6 py-4">Fecha</th>            
+            <th class="px-6 py-4">Descripcion</th>
             <th class="px-6 py-4">Acciones</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
           <tr *ngFor="let item of services" class="hover:bg-blue-50/50 transition-colors cursor-pointer">
             <td class="px-6 py-4">
-              <div class="font-bold text-gray-900">{{ item.name }}</div>
+              <div class="font-bold text-gray-900">{{ item.cliente }}</div>
+              <div class="font-bold text-gray-900">{{ item.cedula }}</div>
               <div class="text-xs text-gray-400">{{ item.email }}</div>
+              <div class="text-xs text-gray-400">{{ item.phone }}</div>
             </td>
             <td class="px-6 py-4">
               <span class="px-2 py-1 rounded-full text-xs font-semibold" 
                 [ngClass]="item.subject === 'app' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'">
-                {{ item.subject }}
+                {{ item.servicio }}                               
               </span>
+              <span [class]="getEstadoClass(item.estado)">{{ item.estado }}</span>            
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              {{ item.createdAt | date:'shortDate' }}
+              {{ item.fecha | date:'shortDate' }}
             </td>
-            <td class="px-6 py-4 italic text-gray-500">
-              {{ item.message }}
+            <td class="px-6 py-4">
+              {{ item.descripcion }}
             </td>
             <td class="px-6 py-4">
                 <div class="flex items-center justify-center gap-3">
                    <!-- Botón Ver -->
-                    <button (click)="view(item.id)" class="text-blue-600 hover:text-blue-800 transition-transform hover:scale-110" title="Ver detalle">
+                    <button (click)="onView(item.idServicio)" class="text-blue-600 hover:text-blue-800 transition-transform hover:scale-110" title="Ver detalle">
                     <svg xmlns="http://w3.org" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -51,14 +54,14 @@
                     </button>
 
                     <!-- Botón Editar -->
-                    <button (click)="update(item.id)" class="text-amber-600 hover:text-amber-800 transition-transform hover:scale-110" title="Editar">
+                    <button (click)="onUpdate(item.idServicio)" class="text-amber-600 hover:text-amber-800 transition-transform hover:scale-110" title="Editar">
                     <svg xmlns="http://w3.org" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                     </button>
 
                     <!-- Botón Eliminar -->
-                    <button (click)="delete(item.id)" class="text-red-600 hover:text-red-800 transition-transform hover:scale-110" title="Eliminar">
+                    <button (click)="onDelete(item.idServicio)" class="text-red-600 hover:text-red-800 transition-transform hover:scale-110" title="Eliminar">
                     <svg xmlns="http://w3.org" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
@@ -75,28 +78,31 @@
       <div *ngFor="let item of services" class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
         <div class="flex justify-between items-start mb-3">
           <div>
-            <h3 class="font-bold text-gray-900 leading-tight">{{ item.name }}</h3>
+            <h3 class="font-bold text-gray-900 leading-tight">{{ item.cliente }}</h3>
             <p class="text-xs text-gray-500">{{ item.email }}</p>
+            <p class="text-xs text-gray-500">{{ item.phone }}</p>
           </div>
           <span class="text-[10px] uppercase font-bold px-2 py-1 rounded bg-gray-100 text-gray-600">
-            ID: {{ item.id }}
+            ID: {{ item.idServicio }}
           </span>
         </div>
         
         <div class="flex items-center gap-2 mb-3">
           <span class="text-xs font-medium px-2 py-0.5 rounded bg-blue-50 text-blue-600 border border-blue-100">
-            {{ item.subject }}
-          </span>
+            {{ item.servicio }}
+          </span>          
           <span class="text-[11px] text-gray-400 italic">
-            {{ item.createdAt | date:'mediumDate' }}
+            {{ item.fecha | date:'mediumDate' }}
           </span>
         </div>
-
         <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed border-l-4 border-blue-400">
-          "{{ item.message }}"
+          <span [class]="getEstadoClass(item.estado)">{{ item.estado }}</span>
+        </div>
+        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed border-l-4 border-blue-400">
+          "{{ item.descripcion }}"
         </div>
         <div class="mt-4 pt-3 border-t border-gray-100 flex justify-around gap-2">
-            <button (click)="view(item.id)" 
+            <button (click)="onView(item.idServicio)" 
                     class="flex-1 flex justify-center items-center py-2 text-blue-600 bg-blue-50 rounded-lg active:bg-blue-100">
                 <svg xmlns="http://w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -105,7 +111,7 @@
                 <span class="ml-1 text-xs font-medium">Ver</span>
             </button>
 
-            <button (click)="update(item.id)" 
+            <button (click)="onUpdate(item.idServicio)" 
                     class="flex-1 flex justify-center items-center py-2 text-amber-600 bg-amber-50 rounded-lg active:bg-amber-100">
                 <svg xmlns="http://w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -113,7 +119,7 @@
                 <span class="ml-1 text-xs font-medium">Editar</span>
             </button>
 
-            <button (click)="delete(item.id)" 
+            <button (click)="onDelete(item.idServicio)" 
                     class="flex-1 flex justify-center items-center py-2 text-red-600 bg-red-50 rounded-lg active:bg-red-100">
                 <svg xmlns="http://w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -123,8 +129,55 @@
         </div>
       </div>
     </div>
-
   </div>
+  <!-- MODAL DE ACTUALIZACIÓN -->
+  <!-- El modal solo existe si AMBOS son ciertos -->
+  <div *ngIf="showEditModal && selectedService" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+    
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/70" (click)="showEditModal = false"></div>
+
+    <!-- Contenedor con ID dinámico (esto fuerza el refresco visual) -->
+    <div class="relative bg-white w-full max-w-md rounded-2xl p-6 shadow-2xl" [id]="'modal-' + selectedService.id">
+      
+      <h2 class="text-xl font-bold mb-4 text-gray-800">Actualizar {{selectedService.name}}</h2>
+
+      <div class="space-y-4">
+        <input 
+          name="editName" 
+          [(ngModel)]="selectedService.cliente" 
+          class="w-full p-2 border rounded text-gray-900 bg-white border-gray-300">
+
+        <input 
+          name="editEmail" 
+          [(ngModel)]="selectedService.email" 
+          class="w-full p-2 border rounded text-gray-900 bg-white border-gray-300">  
+        
+        <textarea 
+          name="editMsg" 
+          [(ngModel)]="selectedService.descripcion" 
+          class="w-full p-2 border rounded text-gray-900 bg-white border-gray-300"></textarea>
+        
+        <label class="block text-sm font-medium text-gray-700">Cambiar Estado</label>
+        <select [(ngModel)]="selectedService.estado" 
+          (ngModelChange) ="selectedService.estado=$event" 
+          name="estado" class="w-full border border-gray-300 rounded p-2 mt-1 text-gray-900 bg-white">
+          <option *ngFor="let opt of opcionesEstado" [value]="opt">{{ opt }}</option>
+        </select>  
+      </div>
+
+      <div class="flex gap-2 mt-6">
+        <button (click)="saveChanges()" class="flex-1 bg-blue-600 text-white py-2 rounded-xl font-bold">
+          Guardar
+        </button>
+        <button (click)="showEditModal = false" class="flex-1 bg-gray-200 text-gray-600 py-2 rounded-xl">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 
 

@@ -4,6 +4,7 @@ import { PrismaClient } from '../../generated/client/client'; // Usa el alias
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   
+  
  
   async onModuleInit() {
     //await this.$connect();
@@ -12,4 +13,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   async onModuleDestroy() {
     //await this.$disconnect();
   }
+
+ 
 }

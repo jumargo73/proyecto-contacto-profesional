@@ -24,9 +24,11 @@ export class ContactoFormComponent implements OnInit {
     // Definimos los campos que coincidan con tu modelo de Prisma
     this.contactoForm = this.fb.group({
       name: ['', Validators.required],
+      identification_number: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      subject: ['',[Validators.required]],
-      message: ['', Validators.required]
+      phone: ['', Validators.required],
+      subject: ['',Validators.required],
+      descripcion: ['', Validators.required]
     });
   }
 

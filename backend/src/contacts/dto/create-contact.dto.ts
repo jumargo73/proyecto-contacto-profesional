@@ -5,8 +5,18 @@ export class CreateContactDto {
   @IsNotEmpty()
   name: string;
 
+  @IsString()
+  @IsNotEmpty()
+  identification_number: string;
+
   @IsEmail()
   email: string;
+
+  @IsString()
+  @IsOptional()
+  phone: string;
+
+  // Datos del Servicio (Subject y Descripción)
 
   @IsString()
   @IsNotEmpty()
@@ -14,6 +24,8 @@ export class CreateContactDto {
 
   @IsString()
   @IsOptional()
-  message?: string;
+  descripcion?: string;
+
+ 
 }
 

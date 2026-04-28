@@ -7,7 +7,7 @@
   import { ContactoFormComponent } from './contacts/components/contacto-form/contacto-form';
   import { LandingLayoutComponent } from './layout/landing-layout/landing-layout';
   import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout';
-  import { ServiceManagement } from './components/service-management/service-management';
+  import { ServiceManagement } from './pages/components/service-management/service-management';
 
   
   import { ProfileComponent } from './pages/components/profile/profile.component';

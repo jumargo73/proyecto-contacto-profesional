@@ -15,13 +15,44 @@ datasource db {
   url      = env("DATABASE_URL") // Regresamos la URL aquí
 }
 
+
+enum StatusName {
+  PENDIENTE
+  EN_TRAMITE
+  FINALIZADO
+}
+
 model Contact {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  subject   String?  @default("General") 
-  message   String?
-  createdAt DateTime @default(now())
+  id        Int       @id @default(autoincrement())
+  nombre    String
+  email     String    @unique
+  phone     String?
+  cedula    String    @unique
+  servicios Service[] // Relación con la tabla Service
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  subject     String
+  descripcion String
+  createdAt   DateTime @default(now())
+  
+  // Relación con Contacto
+  contact     Contact  @relation(fields: [contactId], references: [id])
+  contactId   Int
+
+  // Historial de estados (como hablamos antes)
+  history     ServiceHistory[]
+}
+
+
+model ServiceHistory {
+  id           Int        @id @default(autoincrement())
+  status       StatusName
+  createdAt    DateTime   @default(now())
+  service      Service    @relation(fields: [serviceId], references: [id])
+  serviceId    Int
+  comment      String?    // Opcional: ¿por qué cambió el estado?
 }
 
 // NUEVO: Modelo para los usuarios del sistema (tú)
