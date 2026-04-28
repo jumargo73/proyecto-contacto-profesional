@@ -1,54 +1,55 @@
-/*
-  Warnings:
-
-  - You are about to drop the column `createdAt` on the `Contact` table. All the data in the column will be lost.
-  - You are about to drop the column `message` on the `Contact` table. All the data in the column will be lost.
-  - You are about to drop the column `name` on the `Contact` table. All the data in the column will be lost.
-  - You are about to drop the column `subject` on the `Contact` table. All the data in the column will be lost.
-  - A unique constraint covering the columns `[cedula]` on the table `Contact` will be added. If there are existing duplicate values, this will fail.
-  - Added the required column `cedula` to the `Contact` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `nombre` to the `Contact` table without a default value. This is not possible if the table is not empty.
-
-*/
--- CreateEnum
+-- 1. Crear el ENUM de estados
 CREATE TYPE "StatusName" AS ENUM ('PENDIENTE', 'EN_TRAMITE', 'FINALIZADO');
 
--- AlterTable
-ALTER TABLE "Contact" DROP COLUMN "createdAt",
-DROP COLUMN "message",
-DROP COLUMN "name",
-DROP COLUMN "subject",
-ADD COLUMN     "cedula" TEXT NOT NULL,
-ADD COLUMN     "nombre" TEXT NOT NULL,
-ADD COLUMN     "phone" TEXT;
+-- 2. RENOMBRAR en lugar de borrar (Evita pérdida de datos)
+ALTER TABLE "Contact" RENAME COLUMN "name" TO "nombre";
 
--- CreateTable
+-- 3. AÑADIR columnas nuevas como opcionales primero
+ALTER TABLE "Contact" ADD COLUMN "phone" TEXT;
+ALTER TABLE "Contact" ADD COLUMN "cedula" TEXT;
+
+-- 4. LLENAR 'cedula' con un valor temporal para que no falle el NOT NULL/UNIQUE
+UPDATE "Contact" SET "cedula" = '1234' || id WHERE "cedula" IS NULL;
+
+-- 5. AHORA SÍ, poner restricciones a 'cedula'
+ALTER TABLE "Contact" ALTER COLUMN "cedula" SET NOT NULL;
+CREATE UNIQUE INDEX "Contact_cedula_key" ON "Contact"("cedula");
+
+-- 6. Crear la tabla Service
 CREATE TABLE "Service" (
     "id" SERIAL NOT NULL,
     "subject" TEXT NOT NULL,
     "descripcion" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "contactId" INTEGER NOT NULL,
-
     CONSTRAINT "Service_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+-- 7. MIGRAR los datos de 'message' y 'subject' viejos a la nueva tabla Service
+-- (Hacemos esto ANTES de borrar las columnas de la tabla Contact)
+INSERT INTO "Service" ("subject", "descripcion", "contactId")
+SELECT COALESCE("subject", 'Consulta General'), COALESCE("message", 'Sin descripción'), "id"
+FROM "Contact";
+
+-- 8. Crear la tabla de Historial
 CREATE TABLE "ServiceHistory" (
     "id" SERIAL NOT NULL,
     "status" "StatusName" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "serviceId" INTEGER NOT NULL,
     "comment" TEXT,
-
     CONSTRAINT "ServiceHistory_pkey" PRIMARY KEY ("id")
 );
 
--- CreateIndex
-CREATE UNIQUE INDEX "Contact_cedula_key" ON "Contact"("cedula");
+-- 9. (Opcional) Crear un estado PENDIENTE inicial para los servicios migrados
+INSERT INTO "ServiceHistory" ("status", "serviceId", "comment")
+SELECT 'PENDIENTE', "id", 'Estado inicial migrado' FROM "Service";
 
--- AddForeignKey
+-- 10. LIMPIEZA: Ahora que los datos están a salvo en 'Service', borramos en 'Contact'
+ALTER TABLE "Contact" DROP COLUMN "message";
+ALTER TABLE "Contact" DROP COLUMN "subject";
+-- Nota: Dejamos 'createdAt' en Contact si quieres conservar cuándo se registró el cliente
+
+-- 11. Agregar las llaves foráneas
 ALTER TABLE "Service" ADD CONSTRAINT "Service_contactId_fkey" FOREIGN KEY ("contactId") REFERENCES "Contact"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "ServiceHistory" ADD CONSTRAINT "ServiceHistory_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "Service"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
