@@ -22,7 +22,7 @@
         component: LandingLayoutComponent, // Este componente tiene el <app-public-navbar>
         canActivate: [GuestGuard], 
         children: [
-          { path: '', component: Banner },
+          { path: 'inicio', component: Banner },
           { path: 'login', component: Login },
           { path: 'register', component: Register},
           { path: 'contactos', component: ContactoFormComponent}
