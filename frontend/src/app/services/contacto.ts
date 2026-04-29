@@ -19,6 +19,8 @@ export class ContactoService {
   }
 
   getOne(id: number): Observable<any> {
+    console.log('frontend getOne informacion a encontrar id',id);
+    console.log('frontend getOne informacion a actializar url',`${this.apiUrl}/${id}`);
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 

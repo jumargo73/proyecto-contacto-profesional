@@ -22,18 +22,41 @@ import { tap } from 'rxjs/operators';
 export class ServiceManagement implements OnInit {
 
   services$!: Observable<any[]>;
-  constructor(
-    private contactoService: ContactoService,
-    private cd: ChangeDetectorRef,
-    private route: ActivatedRoute
-  ){}
-
- 
   services: any[] = [];
   selectedService: any = {}; 
   showEditModal: boolean = false;
   nuevoEstado: string = '';
   opcionesEstado = ['PENDIENTE', 'EN_TRAMITE', 'FINALIZADO'];
+  public registros: number = 0;
+  miFormulario!: FormGroup;
+
+
+  constructor(
+    private contactoService: ContactoService,
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+  ){
+    
+    this.miFormulario = this.fb.group({
+      idServicio: ['',Validators.required],
+      cliente: ['', Validators.required],
+      cedula: [''],
+      phone: [''],
+      email: ['', [Validators.required, Validators.email]],
+      servicio: [''],
+      descripcion: [''],
+      estado: [''],
+      fecha: ['']
+    });
+
+  }
+
+ 
+ 
+
+
+ 
 
 
   // En tu componente.ts
@@ -70,6 +93,26 @@ export class ServiceManagement implements OnInit {
         }
       })
     );
+  }
+
+  obtenerRegistro(id: number) {
+
+    this.services$ = this.contactoService.getOne(id).pipe(
+      tap(datos => {
+        console.log('frontend obtenerRegistro Cantidad de registros:', datos.length);
+        this.registros=datos.length
+        console.log('frontend obtenerRegistro variable registros:', this.registros);
+        if (datos.length === 1) {
+            if (datos && datos.length > 0) {
+              this.miFormulario.patchValue(datos[0]); 
+        }
+          this.showEditModal = true;
+        }
+      })
+    );
+
+    return this.registros
+
   }
 
   /*obtenerTodos() {
@@ -109,59 +152,41 @@ export class ServiceManagement implements OnInit {
   // ACTUALIZAR: Conecta con @Patch(':id')
   onUpdate(id: any) {
 
-    console.log("onUpdate activado")
-    console.log("onUpdate id",id)
+    console.log("frontend onUpdate activado")
+    console.log("frontend onUpdate id",id)
     // 1. Forzamos el cierre y limpieza
-    this.showEditModal = false;
+    this.closeChanges();
     
+    this.obtenerRegistro(id);
     // 2. Buscamos el objeto. Usamos == por si uno es string y otro número
-    const encontrado = this.services.find(s => s.idServicio == id);
-    console.log("onUpdate encontrado",encontrado)
-
-    if (encontrado) {
-      // 3. Clonamos la data
-      this.selectedService = { ...encontrado };
-      this.nuevoEstado = this.selectedService.estado; 
-
-      setTimeout(() => {
-        this.nuevoEstado = this.selectedService.estado; // Asegúrate que esta variable es la del [(ngModel)]
-        console.log('Estado sincronizado:', this.nuevoEstado);
-      });
-      
-      // 4. Abrimos el modal
-      this.showEditModal = true;
-      
-      console.log('Abriendo modal para:', this.selectedService.cliente);
-      console.log('Abriendo modal para:', this.nuevoEstado);
-    } else {
-      console.error('No se encontró el servicio con ID:', id);
-    }
+    //const encontrado = this.services.find(s => s.idServicio == id);
   }
 
   saveChanges() {
 
     console.log('saveChanges ejecutado');
-    if (!this.selectedService.idServicio) return;
+    const body = this.miFormulario.value;
+    if (!body.idServicio) return;
 
     const dataToApi = {
-        nombre: this.selectedService.cliente,       // cliente -> nombre
-        email: this.selectedService.email,
-        phone: this.selectedService.phone,
+        nombre: body.cliente,       // cliente -> nombre
+        email: body.email,
+        phone: body.phone,
         // La cédula normalmente no se edita, pero si tu DTO la pide:
-        cedula: this.selectedService.cedula,
+        cedula: body.cedula,
         // Para el servicio:
-        service: this.selectedService.servicio,     // servicio -> subject
-        descripcion: this.selectedService.descripcion,
-        estado: this.selectedService.estado                   // El valor del select del modal
+        service: body.servicio,     // servicio -> subject
+        descripcion: body.descripcion,
+        estado: body.estado                   // El valor del select del modal
       };
 
       
 
     // 1. Llamada al servicio que conecta con @Patch(':id') en NestJS
-    this.contactoService.actualizarServicio(this.selectedService.idServicio, dataToApi).subscribe({
+    this.contactoService.actualizarServicio(body.idServicio, dataToApi).subscribe({
       next: (res) => {
         console.log('Registro actualizado en la DB y en la vista');
-        this.showEditModal = false;
+        this.closeChanges();
         this.obtenerTodos(); // Refresca la tabla        
         this.cd.detectChanges();        
       },
@@ -177,4 +202,11 @@ export class ServiceManagement implements OnInit {
     alert('¡El botón sí responde!');
   }
 
+  closeChanges(){
+    this.showEditModal = false
+    this.registros=0
+    console.log('closeChanges registro',this.registros);
+    console.log('closeChanges showEditModal',this.showEditModal);
+  }
+ 
 }

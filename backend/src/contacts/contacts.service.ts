@@ -83,19 +83,42 @@ export class ContactsService {
 
   // Ejemplo de cómo debería quedar el findOne en contacts.service.ts
   async findOne(id: number) {
-    return await this.prisma.contact.findUnique({
+    console.log('Buscando ID:', id); // Verifica que llegue el número correcto
+    const contacto = await this.prisma.contact.findUnique({
       where: { id: Number(id) },
-        include: {
-          servicios: {
-            include: {
-              history: {
-                orderBy: [{ createdAt: 'desc'},{id: 'desc' }],
-                take: 1
-              }
+      include: {
+        servicios: {
+          include: {
+            history: {
+              orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+              take: 1
             }
           }
         }
+      }
     });
+
+    console.log('Resultado Prisma:', contacto);
+    if (!contacto || !contacto.servicios) {
+        console.log('No hay contacto o no tiene servicios');
+        return [];
+      }
+
+    const resultadoTransformado = contacto.servicios.map(servicio => ({
+        cliente: contacto.nombre, // 👈 Se refiere a la variable del paso 1
+        cedula: contacto.cedula,
+        phone: contacto.phone,
+        email: contacto.email,
+        servicio: servicio.subject,
+        idServicio: servicio.id,
+        descripcion: servicio.descripcion,
+        estado: servicio.history[0]?.status || 'SIN ESTADO',
+        fecha: servicio.history[0]?.createdAt || null
+      }));
+        
+      // 2. Usamos 'contacto' para acceder a los datos del cliente
+      console.log('JSON Enviado:', resultadoTransformado); // Verifica el formato final
+      return resultadoTransformado;
   }
 
 

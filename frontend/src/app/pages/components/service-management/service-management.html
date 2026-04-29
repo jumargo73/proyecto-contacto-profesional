@@ -159,51 +159,64 @@
   </ng-template>
 
   <!-- MODAL DE ACTUALIZACIÓN -->
-  <!-- El modal solo existe si AMBOS son ciertos -->
-  <div *ngIf="showEditModal && selectedService" class="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black bg-opacity-50">
-    
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black/70" (click)="showEditModal = false"></div>
+  <!-- El modal solo existe si AMBOS son ciertos -->   
+ 
+  <!-- Overlay -->
+  <div *ngIf="showEditModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70">
+    <div class="absolute inset-0 bg-black/70">
+      <div *ngIf="(services$ | async) as lista; else miPlantillaModal" class="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black bg-opacity-50">
+        <div *ngIf="lista.length === 0" class="flex flex-col items-center justify-center p-10 text-gray-500">
+          <svg class="w-16 h-16 mb-4 opacity-20" fill="currentColor" viewBox="0 0 20 20">...</svg>
+          <p class="font-medium">No hay servicios encontrados</p>
+        </div>
+        <div *ngIf="lista.length > 0">
+          <div *ngFor="let item of (services$ | async)">
+            <!-- Contenedor con ID dinámico (esto fuerza el refresco visual) -->
+            <div class="relative bg-white w-full max-w-md rounded-2xl p-6 shadow-2xl" [id]="'modal-' + item.idServicio">
+              <form [formGroup]="miFormulario">
+                <h2 class="text-xl font-bold mb-4 text-gray-800">Actualizar {{item.cliente}}</h2>
 
-    <!-- Contenedor con ID dinámico (esto fuerza el refresco visual) -->
-    <div class="relative bg-white w-full max-w-md rounded-2xl p-6 shadow-2xl" [id]="'modal-' + selectedService.id">
-      
-      <h2 class="text-xl font-bold mb-4 text-gray-800">Actualizar {{selectedService.name}}</h2>
+                <div class="space-y-4">
+                  <input 
+                    formControlName="cliente"
+                    class="w-full p-2 border rounded text-gray-900 bg-white border-gray-300">
 
-      <div class="space-y-4">
-        <input 
-          name="editName" 
-          [(ngModel)]="selectedService.cliente" 
-          class="w-full p-2 border rounded text-gray-900 bg-white border-gray-300">
+                  <input 
+                    formControlName="email"
+                    class="w-full p-2 border rounded text-gray-900 bg-white border-gray-300">  
+                  
+                  <div class="relative z-0 p-3 bg-gray-50 rounded-lg border-l-4 border-blue-400 mb-3">  
+                    <textarea formControlName="descripcion"
+                      class="w-full p-2 border rounded text-gray-900 bg-white border-gray-300"></textarea>
+                  </div>  
+                  
+                  <label class="block text-sm font-medium text-gray-700">Cambiar Estado</label>
+                  <select formControlName="estado"  
+                    name="estado" class="w-full border border-gray-300 rounded p-2 mt-1 text-gray-900 bg-white">
+                    <option *ngFor="let opt of opcionesEstado" [value]="opt">{{ opt }}</option>
+                  </select>  
+                </div>
 
-        <input 
-          name="editEmail" 
-          [(ngModel)]="selectedService.email" 
-          class="w-full p-2 border rounded text-gray-900 bg-white border-gray-300">  
-        
-        <textarea 
-          name="editMsg" 
-          [(ngModel)]="selectedService.descripcion" 
-          class="w-full p-2 border rounded text-gray-900 bg-white border-gray-300"></textarea>
-        
-        <label class="block text-sm font-medium text-gray-700">Cambiar Estado</label>
-        <select [(ngModel)]="selectedService.estado" 
-          (ngModelChange) ="selectedService.estado=$event" 
-          name="estado" class="w-full border border-gray-300 rounded p-2 mt-1 text-gray-900 bg-white">
-          <option *ngFor="let opt of opcionesEstado" [value]="opt">{{ opt }}</option>
-        </select>  
+                <div class="flex gap-2 mt-6">
+                  <button (click)="saveChanges()" class="flex-1 bg-blue-600 text-white py-2 rounded-xl font-bold">
+                    Guardar
+                  </button>
+                  <button (click)="closeChanges()" class="flex-1 bg-gray-200 text-gray-600 py-2 rounded-xl">
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="flex gap-2 mt-6">
-        <button (click)="saveChanges()" class="flex-1 bg-blue-600 text-white py-2 rounded-xl font-bold">
-          Guardar
-        </button>
-        <button (click)="showEditModal = false" class="flex-1 bg-gray-200 text-gray-600 py-2 rounded-xl">
-          Cancelar
-        </button>
-      </div>
+      <ng-template #miPlantillaModal>
+          <div class="spinner">
+            <p>Cargando datos desde el servidor...</p>
+          </div>
+      </ng-template>
     </div>
-  </div>
-</div>
+  </div> 
+  
 
 
