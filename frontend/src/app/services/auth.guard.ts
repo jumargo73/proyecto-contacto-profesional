@@ -15,11 +15,12 @@ export class AuthGuard implements CanActivate {
     //console.log("Este es el Tocken recibido desde Backen en AUTHGuard",token)
 
     if (token) {
-      // Si hay token, permitimos el paso     
+      // Si hay token, permitimos el paso 
+        
       return true;
     } else {
       // Si no hay token, lo mandamos al login y bloqueamos
-      this.router.navigate(['/login']);
+      this.router.navigate(['/inicio']);
       return false;
       
     }

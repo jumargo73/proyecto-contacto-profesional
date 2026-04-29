@@ -67,7 +67,7 @@ export class AuthService {
     
     
     // 3. Redirigir al login
-    this.router.navigate(['/login']);
+    this.router.navigate(['/inicio']);
   }
 
 }
