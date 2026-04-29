@@ -12,9 +12,9 @@ import { SharedModule } from '../shared/shared-module';
 
 @NgModule({
   declarations: [
-    DashboardLayoutComponent,
-    SidebarComponent,
-    LandingLayoutComponent
+    DashboardLayoutComponent,    
+    LandingLayoutComponent,
+    SidebarComponent
   ],
   imports: [CommonModule, RouterModule,SharedModule,NavbarHorizontalComponent],
   exports: [DashboardLayoutComponent, LandingLayoutComponent],

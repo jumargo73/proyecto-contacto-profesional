@@ -74,11 +74,13 @@
     </div>
 
     <!-- 📱 VISTA TARJETAS (Móvil: < md) -->
-    <div class="grid grid-cols-1 gap-4 md:hidden">
-      <div *ngFor="let item of services" class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+    <div class="grid grid-cols-1 gap-4 md:hidden isolate">
+      <div *ngFor="let item of services" class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm relative">
+        
+        <!-- Info Cliente -->
         <div class="flex justify-between items-start mb-3">
-          <div>
-            <h3 class="font-bold text-gray-900 leading-tight">{{ item.cliente }}</h3>
+          <div class="max-w-[80%]">
+            <h3 class="font-bold text-gray-900 leading-tight truncate">{{ item.cliente }}</h3>
             <p class="text-xs text-gray-500">{{ item.email }}</p>
             <p class="text-xs text-gray-500">{{ item.phone }}</p>
           </div>
@@ -87,6 +89,7 @@
           </span>
         </div>
         
+        <!-- Badge Servicio y Fecha -->
         <div class="flex items-center gap-2 mb-3">
           <span class="text-xs font-medium px-2 py-0.5 rounded bg-blue-50 text-blue-600 border border-blue-100">
             {{ item.servicio }}
@@ -95,44 +98,58 @@
             {{ item.fecha | date:'mediumDate' }}
           </span>
         </div>
-        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed border-l-4 border-blue-400">
-          <span [class]="getEstadoClass(item.estado)">{{ item.estado }}</span>
-        </div>
-        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed border-l-4 border-blue-400">
-          "{{ item.descripcion }}"
-        </div>
-        <div class="mt-4 pt-3 border-t border-gray-100 flex justify-around gap-2">
-            <button (click)="onView(item.idServicio)" 
-                    class="flex-1 flex justify-center items-center py-2 text-blue-600 bg-blue-50 rounded-lg active:bg-blue-100">
-                <svg xmlns="http://w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                <span class="ml-1 text-xs font-medium">Ver</span>
-            </button>
 
-            <button (click)="onUpdate(item.idServicio)" 
-                    class="flex-1 flex justify-center items-center py-2 text-amber-600 bg-amber-50 rounded-lg active:bg-amber-100">
-                <svg xmlns="http://w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
-                <span class="ml-1 text-xs font-medium">Editar</span>
-            </button>
+        <!-- Contenedor unificado de Estado y Descripción para evitar capas fantasmales -->
+        <div class="relative z-0 p-3 bg-gray-50 rounded-lg border-l-4 border-blue-400 mb-3">
+          <div>
+            <span [class]="getEstadoClass(item.estado)">{{ item.estado }}</span>
+          </div>
+          <p class="text-sm text-gray-700 leading-relaxed italic">
+            "{{ item.descripcion }}"
+          </p>
+        </div>
 
-            <button (click)="onDelete(item.idServicio)" 
-                    class="flex-1 flex justify-center items-center py-2 text-red-600 bg-red-50 rounded-lg active:bg-red-100">
-                <svg xmlns="http://w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-                <span class="ml-1 text-xs font-medium">Borrar</span>
-            </button>
+        <!-- BOTONES: Subimos el z-index y agregamos touch-auto -->
+        <div class="relative z-50 mt-6 pt-3 border-t border-gray-100 flex justify-around gap-2">
+          
+          <!-- BOTÓN VER -->
+          <button type="button" 
+              (click)="$event.stopPropagation(); onView(item.idServicio)"
+              (mousedown)="$event.stopPropagation(); onView(item.idServicio)" 
+                  class="relative z-50 flex-1 flex justify-center items-center py-3 text-blue-600 bg-blue-50 rounded-lg active:bg-blue-200 touch-manipulation">
+            <svg xmlns="http://w3.org" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            <span class="ml-1 text-[11px] font-medium pointer-events-none">Ver</span>
+          </button>
+
+          <!-- BOTÓN EDITAR -->
+          <button type="button" (click)="$event.stopPropagation(); onUpdate(item.idServicio)" 
+              (mousedown)="$event.stopPropagation(); onUpdate(item.idServicio)" 
+                  class="relative z-50 flex-1 flex justify-center items-center py-3 text-amber-600 bg-amber-50 rounded-lg active:bg-amber-200 touch-manipulation">
+            <svg xmlns="http://w3.org" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            <span class="ml-1 text-[11px] font-medium pointer-events-none">Editar</span>
+          </button>
+
+          <!-- BOTÓN BORRAR -->
+          <button type="button" (click)="$event.stopPropagation(); onDelete(item.idServicio)" 
+                 (mousedown)="$event.stopPropagation(); onDelete(item.idServicio)" 
+                  class="relative z-50 flex-1 flex justify-center items-center py-3 text-red-600 bg-red-50 rounded-lg active:bg-red-200 touch-manipulation">
+            <svg xmlns="http://w3.org" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            <span class="ml-1 text-[11px] font-medium pointer-events-none">Borrar</span>
+          </button>
         </div>
       </div>
     </div>
-  </div>
+
   <!-- MODAL DE ACTUALIZACIÓN -->
   <!-- El modal solo existe si AMBOS son ciertos -->
-  <div *ngIf="showEditModal && selectedService" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+  <div *ngIf="showEditModal && selectedService" class="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black bg-opacity-50">
     
     <!-- Overlay -->
     <div class="absolute inset-0 bg-black/70" (click)="showEditModal = false"></div>

@@ -1,14 +1,6 @@
 <!-- Sidebar Contenedor -->
-<div 
-  *ngIf="isOpen$ | async" 
-  (click)="toggleSidebar()" 
-  class="fixed inset-0 z-40 bg-black/50 md:hidden transition-opacity">
-</div>
-<aside 
-    [class.translate-x-0]="isOpen$ | async"
-    [class.-translate-x-full]="!(isOpen$ | async)"
-    class="fixed inset-y-0 left-0 z-50 w-64 bg-gray-900 transition-transform duration-300 transform md:relative md:block md:translate-x-0">
-    
+
+<aside class="sidebar">    
     <!-- Logo o Nombre de la App -->
     <div class="flex items-center px-2">
         <div class="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center">
@@ -18,7 +10,7 @@
     </div>
 
     <!-- Navegación -->
-    <div class="flex flex-col justify-between flex-1 mt-10">
+    <div class="flex flex-col justify-between flex-1 mt-10 p-4">
         <nav class="space-y-2">
             
             <!-- Dashboard -->

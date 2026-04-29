@@ -1,67 +1,85 @@
-/* --- ESTADO PC (Escritorio) --- */
 .layout-container {
-  display: flex;
+  display: grid;
   height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  /* Definimos las áreas para PC por defecto */
+  grid-template-areas: 
+    "sidebar navbar"
+    "sidebar content";
+  grid-template-columns: 250px 1fr; /* Ancho fijo para sidebar */
+  grid-template-rows: auto 1fr;     /* Navbar ajusta a su contenido */
 }
 
 .sidebar {
-  width: 260px;      /* Ancho fijo a la izquierda */
-  height: 100vh;     /* De arriba a abajo */
-  flex-shrink: 0;
-  z-index: 40;
-}
-
-.main-wrapper {
-  display: flex;
-  flex-direction: column; /* Navbar arriba, contenido abajo */
-  flex-grow: 1;           /* Ocupa todo el espacio sobrante */
-  overflow: hidden;
+  grid-area: sidebar;
 }
 
 .navbar {
-  height: 64px;           /* Altura fija */
-  width: 100%;            /* Ocupa el ancho sobrante del sidebar */
-  flex-shrink: 0;
-  z-index: 50;
+  grid-area: navbar;
+}
+
+.main-wrapper {
+  display: contents; /* Desactiva el contenedor para que hijos sigan el grid padre */
 }
 
 .content-area {
-  flex-grow: 1;           /* Espacio sobrante final */
-  overflow-y: auto;
-  padding: 2rem;
+  grid-area: content;
+  overflow-y: auto; /* Scroll solo para el contenido */
 }
 
-/* --- ESTADO MÓVIL (Bajo 768px) --- */
-@media (max-width: 768px) {
-  .layout-container {
-    flex-direction: column; /* Navbar pasa a estar arriba de todo */
-  }
+.sidebar-overlay {
+  display: none; /* Oculto por defecto */
+}
 
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 64px; /* Altura de tu nav */
-    z-index: 100;  /* Nivel máximo */
+/* --- AJUSTES PARA CELULAR --- */
+@media (max-width: 768px) {
+ .layout-container {
+    /* El contenido ahora ocupa todo el ancho porque el sidebar flotará */
+    grid-template-areas: 
+      "navbar"
+      "content";
+    grid-template-columns: 1fr;
   }
 
   .sidebar {
-    position: fixed;
-    top: 64px;    /* <--- CLAVE: El alto de tu Navbar */
+    position: fixed; /* Lo sacamos del flujo del grid */
+    top: 0;
     left: 0;
-    height: calc(100vh - 64px); /* Altura restante */
-    z-index: 90;  /* Menor que el navbar (100) */
-    width: 260px;
-    transition: transform 0.3s ease;  /* Flota sobre el contenido */
-    /* La clase de Angular translate-x-full lo oculta/muestra */
+    height: 100vh;
+    width: 280px;    /* Ancho deseado para el menú móvil */
+
+    background-color: #1a1a2e;
+
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+        
+    visibility: hidden; 
+    pointer-events: none; 
+    
+    transform: translateX(-100%);
+    transition: transform 0.3s ease, visibility 0.3s;
+    z-index: 2000;
   }
 
+  /* Clase para abrir el sidebar al pulsar el botón */
+  .sidebar.is-active {
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
+  /* El contenido ocupa todo el espacio disponible debajo del navbar */
   .content-area {
-    margin-top: 64px;       /* Deja espacio para el nav fijo */
+    grid-area: content;
+  }
+
+  .sidebar-overlay.show {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4); /* Fondo oscurecido */
+    z-index: 1500; /* Por debajo del sidebar (2000) pero sobre el contenido */
   }
 }
 

@@ -1,7 +1,11 @@
 <div class="layout-container">
-  <aside class="sidebar">
+  <aside class="sidebar" [class.is-active]="(isOpen$ | async)">
     <app-sidebar></app-sidebar>
   </aside>
+  <div class="sidebar-overlay" 
+       [class.show]="(isOpen$ | async)"
+       (click)="toggleSidebar()">
+  </div>
 
   <div class="main-wrapper">
     <header class="navbar">

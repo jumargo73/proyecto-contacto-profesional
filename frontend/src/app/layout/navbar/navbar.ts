@@ -10,6 +10,7 @@ import { UiService } from '../../services/ui.service'
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
   imports:[CommonModule,RouterModule,ReactiveFormsModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
@@ -19,9 +20,10 @@ export class NavbarHorizontalComponent implements OnInit {
   public userName$!: Observable<string>;
   public isApiOk$!: Observable<string | null>;
   public isMenuOpen = false;
+  public isOpen$!: Observable<boolean>;
  
   
-  constructor(private authService: AuthService,private uiService: UiService ) {}
+  constructor(private authService: AuthService,private uiService: UiService) {}
   
 
   toggleMenu() {
@@ -31,14 +33,17 @@ export class NavbarHorizontalComponent implements OnInit {
   }
 
 
-  toggleSidebar(){
-    this.uiService.toggleSidebar(); // Ahora esto controla al Sidebar
+  toggleSidebar(){    
+    this.uiService.toggleSidebar(); // Ahora esto controla al Sidebar   
+    this.isOpen$ = this.uiService.sidebarOpen$
+    console.log('Estado del menú sidebar en navbar,ts:', this.isOpen$!); 
   }
  
   
   ngOnInit() {
     this.userName$ = this.authService.userName$;
     this.isApiOk$=this.authService.connection$;
+    this.isOpen$= this.uiService.sidebarOpen$
           
     //console.log("Respuesta recibida desde authService redirect login a dashboard",this.userName$)
     //console.log("Respuesta recibida desde authService redirect login a dashboard",this.isApiOk$)

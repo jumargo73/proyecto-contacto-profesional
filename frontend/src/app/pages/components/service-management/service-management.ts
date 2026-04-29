@@ -77,6 +77,7 @@ export class ServiceManagement implements OnInit {
 
   // VER: Conecta con @Get(':id')
   onView(id: number) {
+    alert("onUpdate activado")
     this.contactoService.getOne(id).subscribe(data => {
       // Aquí puedes abrir un modal con la info que devuelve el backend
       this.services=data; 
@@ -87,11 +88,15 @@ export class ServiceManagement implements OnInit {
 
   // ACTUALIZAR: Conecta con @Patch(':id')
   onUpdate(id: any) {
+
+    console.log("onUpdate activado")
+    console.log("onUpdate id",id)
     // 1. Forzamos el cierre y limpieza
     this.showEditModal = false;
     
     // 2. Buscamos el objeto. Usamos == por si uno es string y otro número
     const encontrado = this.services.find(s => s.idServicio == id);
+    console.log("onUpdate encontrado",encontrado)
 
     if (encontrado) {
       // 3. Clonamos la data
@@ -146,6 +151,10 @@ export class ServiceManagement implements OnInit {
         alert('No se pudo actualizar el registro');
       }
     });
+  }
+
+  probarClick() {
+    alert('¡El botón sí responde!');
   }
 
 }
