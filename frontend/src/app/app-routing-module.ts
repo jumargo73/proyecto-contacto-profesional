@@ -22,6 +22,11 @@
         component: LandingLayoutComponent, // Este componente tiene el <app-public-navbar>
         canActivate: [GuestGuard], 
         children: [
+          { 
+            path: '', 
+            redirectTo: 'inicio', 
+            pathMatch: 'full' 
+          },
           { path: 'inicio', component: Banner },
           { path: 'login', component: Login },
           { path: 'register', component: Register},
