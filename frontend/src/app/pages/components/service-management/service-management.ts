@@ -2,8 +2,10 @@ import { Component, OnInit  } from '@angular/core';
 import { ContactoService } from '../../../services/contacto';
 import { FormBuilder, FormGroup, Validators,FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router,RouterModule } from '@angular/router';
+import { Router,RouterModule,ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-management',
@@ -19,11 +21,14 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class ServiceManagement implements OnInit {
 
+  services$!: Observable<any[]>;
   constructor(
     private contactoService: ContactoService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute
   ){}
 
+ 
   services: any[] = [];
   selectedService: any = {}; 
   showEditModal: boolean = false;
@@ -50,15 +55,30 @@ export class ServiceManagement implements OnInit {
 
 
   ngOnInit() {
-    this.obtenerTodos();
+      console.log('Entré al ServiceManagement') 
+    //this.route.params.subscribe(params => {
+      this.obtenerTodos();
+    //});
   }
 
   obtenerTodos() {
+    this.services$ = this.contactoService.getContactos().pipe(
+      tap(datos => {
+        console.log('Cantidad de registros:', datos.length);
+        if (datos.length === 0) {
+          // Aquí puedes disparar una alerta o lógica extra
+        }
+      })
+    );
+  }
+
+  /*obtenerTodos() {
     this.contactoService.getContactos().subscribe(data => {
       this.services=data;  // 'contactos' es la variable que pintas en el HTML
+      this.cd.detectChanges(); 
       console.log('Datos cargados:', this.services);
     });
-  }
+  }*/
 
 
   // ELIMINAR: Conecta con @Delete(':id')

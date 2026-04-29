@@ -21,6 +21,7 @@ export class DashboardLayoutComponent implements OnInit {
       });
       this.isOpen$=this.uiService.sidebarOpen$
       console.log("estado del menu en sidebar,ts",this.isOpen$) 
+      console.log('Entré al DashboardLayoutComponent')
     }
 
 
