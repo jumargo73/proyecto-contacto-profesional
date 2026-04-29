@@ -14,6 +14,8 @@
   import { AuthGuard } from './services/auth.guard'; // Tu guardia de seguridad
   import { GuestGuard } from './services/guest.guard'; // Tu guardia de seguridad
 
+  import { Services } from './shared/pages/components/services/services';
+  import { About } from './shared/pages/components/about/about';
   const routes: Routes = [
       // Ruta Pública
       
@@ -29,8 +31,10 @@
           },
           { path: 'inicio', component: Banner },
           { path: 'login', component: Login },
+          { path: 'servicios', component: Services },
           { path: 'register', component: Register},
-          { path: 'contactos', component: ContactoFormComponent}
+          { path: 'contactos', component: ContactoFormComponent},
+          { path: 'about',component: About}
         ]
       },
       

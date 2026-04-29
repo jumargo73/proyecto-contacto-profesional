@@ -1,13 +1,36 @@
 <nav class="navbar-horizontal">
-  <div class="logo">TECHCORE</div>
+ 
   
-  <label class="menu-icon" (click)="isMenuOpen = !isMenuOpen">☰</label>
+  <div class="logo">
+    <div class="flex items-center px-4 py-3">
+        <!-- Contenedor del Icono (Cuadro Cian) -->
+        <div class="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
+            <img src="/logos/logo.png" 
+                alt="Logo" 
+                class="h-7 w-7 object-contain brightness-110 contrast-125">
+        </div>
+
+        <!-- Texto del Logo -->
+        <span class="ml-3 text-xl font-bold text-white tracking-tight">
+            JMG Digital
+        </span>
+    </div>
+  </div> 
+   
+  
+  <button (click)="isMenuOpen = !isMenuOpen" class="menu-icon text-slate-300 hover:text-white md:hidden focus:outline-none">
+    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+    </svg>
+  </button>
 
   <ul class="nav-links" [class.show]="isMenuOpen">
     <li><a routerLink="/inicio">Inicio</a></li>
     <li><a routerLink="/login">Login</a></li>
     <li><a routerLink="/servicios">Servicios</a></li>
     <li><a routerLink="/contactos">Contacto</a></li>
+    <li><a routerLink="/about">Acerca de</a></li>
     <li><button class="api-status">API Status</button></li>
   </ul>
+
 </nav>
