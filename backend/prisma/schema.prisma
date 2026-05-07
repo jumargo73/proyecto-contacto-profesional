@@ -28,6 +28,7 @@ model Contact {
   email     String    @unique
   phone     String?
   cedula    String    @unique
+  createdAt DateTime @default(now())
   servicios Service[] // Relación con la tabla Service
 }
 
@@ -62,5 +63,15 @@ model User {
   password  String   // Aquí guardaremos el hash, nunca la clave plana
   name      String?
   role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+}
+
+model TaxiServices {
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  email     String   @unique
+  phone     String?
+  rutaIni   String?
+  rutaFin   String 
   createdAt DateTime @default(now())
 }

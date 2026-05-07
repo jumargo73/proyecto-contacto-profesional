@@ -16,6 +16,9 @@
 
   import { Services } from './shared/pages/components/services/services';
   import { About } from './shared/pages/components/about/about';
+  import { Proyectos } from './shared/pages/components/proyectos/proyectos'
+  import { SaberMas } from './shared/pages/components/saber-mas/saber-mas'
+  import { Taxi } from './shared/pages/components/services/taxi/taxi'
   const routes: Routes = [
       // Ruta Pública
       
@@ -34,7 +37,10 @@
           { path: 'servicios', component: Services },
           { path: 'register', component: Register},
           { path: 'contactos', component: ContactoFormComponent},
-          { path: 'about',component: About}
+          { path: 'about',component: About},
+          { path: 'proyectos',component: Proyectos},
+          { path: 'saberMas',component: SaberMas},
+          { path: 'taxi',component: Taxi},
         ]
       },
       

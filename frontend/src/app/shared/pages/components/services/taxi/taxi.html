@@ -1,0 +1,60 @@
+<div class="min-h-screen flex items-center justify-center bg-slate-950 p-6">
+  <!-- Contenedor Glassmorphism -->
+  <form [formGroup]="taxiForm" (ngSubmit)="onReserve()" class="w-full max-w-2xl bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-2xl">
+    
+    <div class="space-y-6">
+      <!-- Nombre -->
+      <div>
+        <label class="block text-white text-sm font-medium mb-2 ml-1">Nombre</label>
+        <input type="text" 
+               formControlName="nombre" 
+               class="w-full bg-white rounded-lg py-3 px-4 outline-none focus:ring-2 focus:ring-cyan-500 transition-all text-slate-900"
+               placeholder="Tu nombre completo">
+      </div>
+
+      <!-- Teléfono -->
+      <div>
+        <label class="block text-white text-sm font-medium mb-2 ml-1">Teléfono</label>
+        <input type="tel" 
+               formControlName="phone" 
+               class="w-full bg-white rounded-lg py-3 px-4 outline-none focus:ring-2 focus:ring-cyan-500 transition-all text-slate-900"
+               placeholder="Ej: +57 300 000 0000">
+      </div>
+
+      <!-- email -->
+      <div>
+        <label class="block text-white text-sm font-medium mb-2 ml-1">E-mail</label>
+        <input type="email" 
+               formControlName="email" 
+               class="w-full bg-white rounded-lg py-3 px-4 outline-none focus:ring-2 focus:ring-cyan-500 transition-all text-slate-900"
+               placeholder="Ej: +57 300 000 0000">
+      </div>
+
+      <!-- Origen -->
+      <div>
+        <label class="block text-white text-sm font-medium mb-2 ml-1">Origen</label>
+        <input type="text" 
+               formControlName="rutaIni" 
+               class="w-full bg-white rounded-lg py-3 px-4 outline-none focus:ring-2 focus:ring-cyan-500 transition-all text-slate-900"
+               placeholder="¿Dónde te recogemos?">
+      </div>
+
+      <!-- Destino -->
+      <div>
+        <label class="block text-white text-sm font-medium mb-2 ml-1">Destino</label>
+        <input type="text" 
+               formControlName="rutaFin" 
+               class="w-full bg-white rounded-lg py-3 px-4 outline-none focus:ring-2 focus:ring-cyan-500 transition-all text-slate-900"
+               placeholder="¿A dónde vas?">
+      </div>
+
+      <!-- Botón Enviar -->
+      <button type="submit" 
+              class="w-full bg-cyan-500 hover:bg-cyan-400 text-white font-bold py-4 rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/30 active:scale-[0.98] uppercase tracking-wider text-sm mt-4">
+        Solicitar Taxi
+      </button>
+    </div>
+
+  </form>
+</div>
+

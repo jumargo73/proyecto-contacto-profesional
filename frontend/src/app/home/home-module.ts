@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Banner } from './components/banner/banner';
 
 @NgModule({
-  declarations: [Banner],
-  imports: [CommonModule],
+  declarations: [],
+  imports: [CommonModule,Banner],
 })
 export class HomeModule {}
